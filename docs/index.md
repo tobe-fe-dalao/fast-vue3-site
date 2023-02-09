@@ -1,7 +1,7 @@
 ---
 layout: home
 
-title: Vue-H5-Template
+title: Fast-Vue3
 titleTemplate: 一个快速开发的vue h5移动端脚手架
 
 hero:
@@ -14,7 +14,7 @@ hero:
       link: /guide/
     - theme: alt
       text: Github仓库
-      link: https://github.com/sunniejs/vue-h5-template
+      link: https://github.com/tobe-fe-dalao/fast-vue3
 
 features:
   - icon: 💡
