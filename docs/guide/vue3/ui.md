@@ -28,8 +28,9 @@ resolvers: [
 
 ## 不需要某个组件库
 
-1. yarn remove 不想要的组件的包
-2. 删除对应的 resolvers
+1. 删除不需要的组件
+2. remove 不想要的组件的包依赖
+3. 删除`build/vite/plugin/component`下对应的`resolvers`
 
 ## 参考文档
 

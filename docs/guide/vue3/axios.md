@@ -9,12 +9,13 @@
 ```javascript
 import axios from "axios";
 import store from "@/store";
-import { Toast } from "vant";
+import { showToast，closeToast } from 'vant';
 // 根据环境不同引入不同api地址
 import { baseApi } from "@/config";
+
 // create an axios instance
 const service = axios.create({
-  baseURL: baseApi, // url = base api url + request url
+  baseURL: import.meta.env.VITE_APP_API_BASEURL,, // url = base api url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000, // request timeout
 });
@@ -25,9 +26,11 @@ service.interceptors.request.use(
     // 不传递默认开启loading
     if (!config.hideloading) {
       // loading
-      Toast.loading({
-        forbidClick: true,
-      });
+    showLoadingToast({
+      message: '加载中...',
+      forbidClick: true,
+      loadingType: 'spinner',
+    });
     }
     if (store.getters.token) {
       config.headers["X-Token"] = "";
@@ -58,7 +61,7 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    Toast.clear();
+    closeToast();
     console.log("err" + error); // for debug
     return Promise.reject(error);
   }
