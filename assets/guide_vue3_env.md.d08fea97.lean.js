@@ -1,0 +1,1 @@
+import{_ as s,c as o,o as e,a}from"./app.8da8ea6b.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/vue3/env.md","lastUpdated":1676691134000}'),n={name:"guide/vue3/env.md"},p=a("",3),t=[p];function l(c,r,d,D,F,i){return e(),o("div",null,t)}const _=s(n,[["render",l]]);export{u as __pageData,_ as default};

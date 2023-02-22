@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as n,a as p}from"./app.8da8ea6b.js";const _=JSON.parse('{"title":"proxy 跨域","description":"","frontmatter":{},"headers":[],"relativePath":"guide/vue3/proxy.md","lastUpdated":1676691134000}'),l={name:"guide/vue3/proxy.md"},o=p("",2),e=[o];function t(c,r,F,y,D,i){return n(),a("div",null,e)}const C=s(l,[["render",t]]);export{_ as __pageData,C as default};
