@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as n,a as e}from"./app.552595ab.js";const y=JSON.parse('{"title":"参与编辑","description":"","frontmatter":{},"headers":[],"relativePath":"guide/edit.md","lastUpdated":1676777534000}'),l={name:"guide/edit.md"},p=e("",3),t=[p];function o(c,i,r,d,C,A){return n(),a("div",null,t)}const h=s(l,[["render",o]]);export{y as __pageData,h as default};
