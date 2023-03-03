@@ -1,0 +1,1 @@
+import{_ as s,c as n,o as a,a as l}from"./app.552595ab.js";const C=JSON.parse('{"title":"axios 封装及接口管理","description":"","frontmatter":{},"headers":[],"relativePath":"guide/vue3/axios.md","lastUpdated":1677290683000}'),o={name:"guide/vue3/axios.md"},p=l("",4),e=[p];function t(c,r,F,y,D,i){return a(),n("div",null,e)}const f=s(o,[["render",t]]);export{C as __pageData,f as default};

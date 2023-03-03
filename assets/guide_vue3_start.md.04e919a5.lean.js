@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as n,a as e}from"./app.552595ab.js";const h=JSON.parse('{"title":"启动项目","description":"","frontmatter":{},"headers":[],"relativePath":"guide/vue3/start.md","lastUpdated":1677290683000}'),t={name:"guide/vue3/start.md"},l=e("",2),p=[l];function o(c,r,i,d,_,C){return n(),a("div",null,p)}const u=s(t,[["render",o]]);export{h as __pageData,u as default};
