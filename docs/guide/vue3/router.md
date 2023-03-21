@@ -11,7 +11,7 @@ import Vue from "vue";
 import { createRouter, createWebHistory, Router } from "vue-router";
 
 Vue.use(Router);
-export const router = [
+export const routes = [
   {
     name: "root",
     path: "/",
