@@ -1,12 +1,12 @@
 # Fast-vue3
 
-[Fast-vue3](https://github.com/tobe-fe-dalao/fast-vue3)，是基于 vite3 + vue3 + pinia + ( Antd-vue or Element-plus or Naive ) ，构建 PC 端快速开发脚手架
+[Fast-vue3](https://github.com/tobe-fe-dalao/fast-vue3)，是基于 vite3 + vue3 + pinia + ( Antd-vue or Element-plus or Naive or TDesign ) ，构建 PC 端快速开发脚手架
 
 ## 特点
 
 ### 最新技术栈
 
-- 框架选型基于当下流行的 vue + vite + ts 模式，精选社区 star 和满意度均不错的 ui 框架和 vite 插件，并时常进行更新，确保与官方文档一致
+- 框架选型基于当下流行的 vue + vite + ts 模式，精选社区 star 和满意度均不错的 ui 框架和 vite 插件，并时常进行更新，确保与官方文档的 api 保持一致。
 
 ### 基于 TypeScript
 
