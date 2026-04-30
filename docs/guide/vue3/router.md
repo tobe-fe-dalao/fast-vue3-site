@@ -1,29 +1,62 @@
-# vue-router
+# Vue Router
 
-本案例采用 `hash` 模式，开发者根据需求修改 `mode` `base`
+项目使用 **Vue Router 4** + **unplugin-vue-router** 实现文件路由（File-Based Routing），无需手动注册路由。
 
-**注意**：如果你使用了 `history` 模式， `vue.config.js` 中的 `publicPath` 要做对应的**修改**
+## 文件路由
 
-前往:[vue.config.js 基础配置](#base)
+路由根据 `src/views/` 目录结构自动生成：
 
-```javascript
-import Vue from "vue";
-import { createRouter, createWebHistory, Router } from "vue-router";
+```bash
+src/views/
+├── index.vue           → /
+├── login/
+│   └── index.vue       → /login
+├── component/
+│   └── index.vue       → /component
+├── contain/
+│   └── index.vue       → /contain
+└── demo/
+    └── index.vue       → /demo
+```
 
-Vue.use(Router);
-export const routes = [
-  {
-    name: "root",
-    path: "/",
-    redirect: "/home",
-    component: () => import("@/layout/basic/index.vue"),
-  },
-];
+自动生成的类型化路由定义在 `types/typed-router.d.ts` 中。
 
-const router: Router = createRouter({
-  history: createWebHistory(),
-  routes: routes,
+## 路由配置
+
+```typescript
+// src/router/index.ts
+import { createRouter, createWebHashHistory } from "vue-router";
+import { routes } from "vue-router/auto-routes";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
+const baseURL = import.meta.env.VITE_BASE_URL;
+
+const router = createRouter({
+  history: createWebHashHistory(baseURL),
+  routes,
+});
+
+// 路由守卫 - 进度条
+router.beforeEach(async (_to, _from, next) => {
+  NProgress.start();
+  next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
 ```
+
+## 创建新页面
+
+使用 Plop 模板生成器快速创建页面：
+
+```bash
+pnpm plop
+# 选择 "page" → 选择目录 → 输入文件名
+```
+
+或手动在 `src/views/` 下创建 `.vue` 文件，路由将自动注册。

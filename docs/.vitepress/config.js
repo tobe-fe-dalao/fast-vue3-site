@@ -1,18 +1,14 @@
 module.exports = {
   lang: "zh-CN",
-  title: "fast-vue3",
+  title: "Fast-Vue3",
   base: "/fast-vue3-site/",
-  description: "一个开箱即用的vue h5脚手架",
+  description: "Vue3 + Vite + TypeScript 快速开发脚手架",
   lastUpdated: true,
-  head: [
-    // 添加图标
-    ["link", { rel: "icon", href: "/favicon.ico" }],
-  ],
+  head: [["link", { rel: "icon", href: "/favicon.ico" }]],
   themeConfig: {
     nav: nav(),
     sidebar: {
       "/guide/": sidebarGuide(),
-      "/en_us/": "en_us",
     },
     socialLinks: [
       { icon: "github", link: "https://github.com/tobe-fe-dalao/fast-vue3" },
@@ -52,19 +48,16 @@ function sidebarGuide() {
       collapsible: true,
       items: [
         { text: "启动项目", link: "/guide/vue3/start" },
-        { text: "vite.config.ts 基础配置", link: "/guide/vue3/base" },
-        { text: "vite插件集成", link: "/guide/vue3/vite" },
+        { text: "vite.config.mts 基础配置", link: "/guide/vue3/base" },
+        { text: "Vite 插件集成", link: "/guide/vue3/vite" },
         { text: "多环境变量", link: "/guide/vue3/env" },
-        { text: "UI组件库", link: "/guide/vue3/ui" },
+        { text: "多 UI 组件库", link: "/guide/vue3/ui" },
         { text: "Pinia 状态管理", link: "/guide/vue3/pinia" },
-        { text: "vue-router", link: "/guide/vue3/router" },
-        { text: "axios 封装及接口管理", link: "/guide/vue3/axios" },
-        { text: "alias", link: "/guide/vue3/alias" },
-        { text: "proxy 跨域", link: "/guide/vue3/proxy" },
-        {
-          text: "统一开发规范",
-          link: "/guide/vue3/lint",
-        },
+        { text: "Vue Router（文件路由）", link: "/guide/vue3/router" },
+        { text: "Axios 封装及接口管理", link: "/guide/vue3/axios" },
+        { text: "路径别名（alias）", link: "/guide/vue3/alias" },
+        { text: "Proxy 跨域配置", link: "/guide/vue3/proxy" },
+        { text: "ESLint + Prettier + Stylelint", link: "/guide/vue3/lint" },
       ],
     },
   ];

@@ -1,73 +1,56 @@
-# vite.config.ts 基础配置
+# vite.config.mts 基础配置
 
-如果你的 `Vue Router` 模式是 hash
+项目使用 `vite.config.mts`（ESM TypeScript 配置文件），基于 Vite 7 构建。
 
-```javascript
-publicPath: './',
-```
+## 完整配置
 
-如果你的 `Vue Router` 模式是 history 这里的 publicPath 和你的 `Vue Router` `base` **保持一致**
-
-```javascript
-publicPath: '/app/',
-```
-
-```javascript
-import { UserConfig, ConfigEnv } from "vite";
+```typescript
+import type { UserConfig, ConfigEnv } from "vite";
+import { loadEnv } from "vite";
 import { createVitePlugins } from "./build/vite/plugins";
-import { resolve } from "path";
+import { fileURLToPath, URL } from "node:url";
 import proxy from "./build/vite/proxy";
-import { VITE_PORT } from "./build/constant";
+import { wrapperEnv } from "./build/utils";
 
-function pathResolve(dir: string) {
-  return resolve(process.cwd(), ".", dir);
-}
-
-// https://vitejs.dev/config/
-export default ({ command }: ConfigEnv): UserConfig => {
+export default ({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === "build";
-  let base: string;
-  if (command === "build") {
-    base = "/fast-vue3/";
-  } else {
-    base = "/";
-  }
-  return {
-    base,
-    resolve: {
-      alias: [
-        {
-          find: "vue-i18n",
-          replacement: "vue-i18n/dist/vue-i18n.cjs.js",
-        },
-        // /@/xxxx => src/xxxx
-        {
-          find: /\/@\//,
-          replacement: pathResolve("src") + "/",
-        },
-        // /#/xxxx => types/xxxx
-        {
-          find: /\/#\//,
-          replacement: pathResolve("types") + "/",
-        },
-      ],
-    },
-    // plugins
-    plugins: createVitePlugins(isBuild),
+  const root = process.cwd();
+  const env = loadEnv(mode, root);
+  const viteEnv = wrapperEnv(env);
 
-    // css
+  return {
+    base: process.env.VITE_BASE_URL,
+    resolve: {
+      alias: {
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "#": fileURLToPath(new URL("./types", import.meta.url)),
+      },
+      extensions: [".ts", ".js", ".mjs", ".mts"],
+    },
+
+    // 插件（详见 build/vite/plugins/index.ts）
+    plugins: createVitePlugins(viteEnv, isBuild),
+
     css: {},
 
-    // server
     server: {
-      hmr: { overlay: false }, // 禁用或配置 HMR 连接 设置 server.hmr.overlay 为 false 可以禁用服务器错误遮罩层
-      // 服务配置
-      port: VITE_PORT, // 类型： number 指定服务器端口;
-      open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
-      cors: false, // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
-      host: "0.0.0.0", // IP配置，支持从IP启动
+      hmr: { overlay: true },
+      port: 3000,
+      open: false,
+      cors: true,
+      host: "0.0.0.0",
       proxy,
     },
   };
 };
 ```
+
+## 关键配置说明
+
+| 配置项         | 说明                                       |
+| -------------- | ------------------------------------------ |
+| `base`         | 通过环境变量 `VITE_BASE_URL` 控制部署路径  |
+| `alias`        | `@` 映射 `src/`，`#` 映射 `types/`         |
+| `plugins`      | 插件按环境条件加载，详见 Vite 插件集成章节 |
+| `server.cors`  | 开发服务器启用 CORS                        |
+| `server.proxy` | 代理配置独立在 `build/vite/proxy.ts`       |

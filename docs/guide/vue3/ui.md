@@ -1,43 +1,58 @@
-# 多 UI 组件库供选择
+# 多 UI 组件库集成
 
-Vite 构建工具，使用 vite-plugin-style-import 和 unplugin-vue-components/vite 实现按需引入。
+项目集成了 **7+** 主流 Vue 3 UI 组件库，通过 `unplugin-vue-components` 和 `unplugin-auto-import` 实现按需自动导入，无需手动注册。
 
-## 安装插件
+## 已集成的组件库
 
-```bash
-yarn add vite-plugin-style-import -D
-yarn add unplugin-vue-components/vite -D
+| 组件库                                                    | 版本    | 说明                   |
+| --------------------------------------------------------- | ------- | ---------------------- |
+| [Element Plus](https://element-plus.org/)                 | ^2.13.7 | 饿了么团队出品         |
+| [Ant Design Vue](https://antdv.com/)                      | ^4.2.6  | Ant Design 的 Vue 实现 |
+| [Naive UI](https://www.naiveui.com/)                      | ^2.44.1 | 尤雨溪推荐             |
+| [TDesign Vue Next](https://tdesign.tencent.com/vue-next/) | ^1.19.1 | 腾讯出品               |
+| [Arco Design Vue](https://arco.design/vue/)               | ^2.57.0 | 字节跳动出品           |
+| [Vue DevUI](https://vue-devui.github.io/)                 | ^1.6.34 | 华为 DevUI             |
+| [iDux](https://idux.site/)                                | ^2.11.0 | iDux 组件库            |
+| [VueUse Components](https://vueuse.org/)                  | ^14.2.1 | 实用工具组件           |
+
+## 自动导入配置
+
+组件自动注册在 `build/vite/plugins/component.ts`：
+
+```typescript
+import Components from "unplugin-vue-components/vite";
+import {
+  ElementPlusResolver,
+  VueUseComponentsResolver,
+  AntDesignVueResolver,
+  TDesignResolver,
+  NaiveUiResolver,
+  DevUiResolver,
+  IduxResolver,
+} from "unplugin-vue-components/resolvers";
+import { ArcoResolver } from "unplugin-vue-components/resolvers";
+
+Components({
+  dirs: ["src/components"],
+  resolvers: [
+    ElementPlusResolver(),
+    VueUseComponentsResolver(),
+    AntDesignVueResolver({ importStyle: false }),
+    TDesignResolver({ library: "vue-next" }),
+    NaiveUiResolver(),
+    ArcoResolver({ sideEffect: true }),
+    DevUiResolver(),
+    IduxResolver(),
+  ],
+});
 ```
 
-## 使用组件库
+API 自动导入在 `build/vite/plugins/autoImport.ts`，包含 Vue、Pinia、VueRouter、VueUse 等常用 API 的自动导入。
 
-在`build/vite/plugins/component.ts`下
+## 移除不需要的组件库
 
-```javascript
-import { ElementPlusResolver, VueUseComponentsResolver, AntDesignVueResolver,TDesignResolver,NaiveUiResolver } from 'unplugin-vue-components/resolvers';
-...
-resolvers: [
-  ElementPlusResolver(),
-  VueUseComponentsResolver(),
-  AntDesignVueResolver(),
-  TDesignResolver(),
-  NaiveUiResolver()
-]
-...
-```
-
-## 不需要某个组件库
-
-1. 删除不需要的组件
-2. remove 不想要的组件的包依赖
-3. 删除`build/vite/plugin/component`下对应的`resolvers`
-
-## 参考文档
-
-- [ElementPlus](https://element-plus.gitee.io/zh-CN/component/button.html)
-
-- [AntDesignVue](https://next.antdv.com/docs/vue/introduce-cn/)
-
-- [TDesign](https://tdesign.tencent.com/vue-next/components/button)
-
-- [Naive](https://www.naiveui.com/zh-CN/os-theme/components/avatar)
+1. 从 `package.json` 中移除对应依赖
+2. 从 `build/vite/plugins/component.ts` 移除对应 Resolver
+3. 从 `build/vite/plugins/autoImport.ts` 移除对应 Resolver
+4. 从 `src/main.ts` 移除对应 CSS 导入
+5. 运行 `pnpm install` 更新依赖
