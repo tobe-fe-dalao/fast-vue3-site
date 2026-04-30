@@ -1,0 +1,14 @@
+import{_ as t,o as s,c as a,O as n}from"./chunks/framework.a140e42d.js";const C=JSON.parse('{"title":"启动项目","description":"","frontmatter":{},"headers":[],"relativePath":"guide/vue3/start.md","filePath":"guide/vue3/start.md","lastUpdated":1777552775000}'),e={name:"guide/vue3/start.md"},p=n(`<h1 id="启动项目" tabindex="-1">启动项目 <a class="header-anchor" href="#启动项目" aria-label="Permalink to &quot;启动项目&quot;">​</a></h1><div class="language-bash"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki material-theme-palenight"><code><span class="line"><span style="color:#676E95;font-style:italic;"># 拉取项目</span></span>
+<span class="line"><span style="color:#FFCB6B;">git</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">clone</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">https://github.com/tobe-fe-dalao/fast-vue3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#676E95;font-style:italic;"># 安装依赖（推荐 pnpm）</span></span>
+<span class="line"><span style="color:#FFCB6B;">pnpm</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">install</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#676E95;font-style:italic;"># 启动开发服务器</span></span>
+<span class="line"><span style="color:#FFCB6B;">pnpm</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">dev</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#676E95;font-style:italic;"># 构建生产版本</span></span>
+<span class="line"><span style="color:#FFCB6B;">pnpm</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">build</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#676E95;font-style:italic;"># 预览构建结果</span></span>
+<span class="line"><span style="color:#FFCB6B;">pnpm</span><span style="color:#A6ACCD;"> </span><span style="color:#C3E88D;">preview</span></span></code></pre></div><h2 id="可用脚本" tabindex="-1">可用脚本 <a class="header-anchor" href="#可用脚本" aria-label="Permalink to &quot;可用脚本&quot;">​</a></h2><table><thead><tr><th>命令</th><th>说明</th></tr></thead><tbody><tr><td><code>pnpm dev</code></td><td>启动开发服务器</td></tr><tr><td><code>pnpm build</code></td><td>TypeScript 类型检查 + 生产构建</td></tr><tr><td><code>pnpm build:dev</code></td><td>开发模式构建</td></tr><tr><td><code>pnpm build:pro</code></td><td>生产模式构建</td></tr><tr><td><code>pnpm preview</code></td><td>预览构建结果</td></tr><tr><td><code>pnpm plop</code></td><td>代码模板生成（页面/组件/Store）</td></tr><tr><td><code>pnpm lint:eslint</code></td><td>ESLint 检查并修复</td></tr><tr><td><code>pnpm lint:prettier</code></td><td>Prettier 格式化</td></tr><tr><td><code>pnpm lint:stylelint</code></td><td>Stylelint 检查并修复</td></tr><tr><td><code>pnpm commit</code></td><td>规范化 Git 提交</td></tr></tbody></table>`,4),l=[p];function o(d,c,r,i,y,m){return s(),a("div",null,l)}const _=t(e,[["render",o]]);export{C as __pageData,_ as default};
