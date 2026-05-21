@@ -1,0 +1,11 @@
+import{_ as a,o as i,c as n,ag as t}from"./chunks/framework.gmyryY1Z.js";const o=JSON.parse('{"title":"参与编辑","description":"","frontmatter":{},"headers":[],"relativePath":"guide/edit.md","filePath":"guide/edit.md","lastUpdated":1777552775000}'),e={name:"guide/edit.md"};function p(l,s,h,k,d,r){return i(),n("div",null,[...s[0]||(s[0]=[t(`<h1 id="参与编辑" tabindex="-1">参与编辑 <a class="header-anchor" href="#参与编辑" aria-label="Permalink to &quot;参与编辑&quot;">​</a></h1><p>欢迎有意愿参与到开源的朋友，加入到本文档的编写，书写文档不仅是教会别人知识，更是用自己的表达方式概括自己所学习知识的一种方式，这对个人来说是不错的成长机会。</p><div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># 拉取项目</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">git</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> clone</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> https://github.com/tobe-fe-dalao/fast-vue3-site</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># 切换分支</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">git</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> checkout</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> docs</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> origin/docs</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># 安装依赖</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">pnpm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> install</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># 启动项目</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">pnpm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> start</span></span></code></pre></div>`,3)])])}const g=a(e,[["render",p]]);export{o as __pageData,g as default};
