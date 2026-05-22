@@ -20,7 +20,7 @@ catalog:
   # 新增 UI 库
   my-ui-lib: ^1.0.0
   # 如需 resolver 插件
-  '@my-ui/auto-import-resolver': ^1.0.0
+  "@my-ui/auto-import-resolver": ^1.0.0
 ```
 
 ### 2. 创建应用目录
@@ -72,15 +72,15 @@ mkdir -p apps/web-myui/{mock,types}
 ### 4. 配置 vite.config.ts
 
 ```ts
-import { defineConfig } from '@fast-vue3/vite-config';
-import { MyUiResolver } from 'unplugin-vue-components/resolvers';
+import { defineConfig } from "@fast-vue3/vite-config";
+import { MyUiResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig(async () => ({
   application: {
     uiResolvers: [MyUiResolver()],
   },
   vite: {
-    server: { port: 3006 },  // 选择未占用的端口
+    server: { port: 3006 }, // 选择未占用的端口
   },
 }));
 ```
@@ -89,11 +89,11 @@ export default defineConfig(async () => ({
 
 ```ts
 // src/main.ts
-import { createApp } from 'vue';
-import App from './App.vue';
-import { setupRouter } from './router';
-import { setupStore } from '@fast-vue3/stores';
-import { setupMyUI } from './plugins/myui';
+import { createApp } from "vue";
+import App from "./App.vue";
+import { setupRouter } from "./router";
+import { setupStore } from "@fast-vue3/stores";
+import { setupMyUI } from "./plugins/myui";
 
 async function bootstrap() {
   const app = createApp(App);
@@ -101,7 +101,7 @@ async function bootstrap() {
   setupMyUI(app);
   const router = setupRouter(app);
   await router.isReady();
-  app.mount('#app');
+  app.mount("#app");
 }
 
 bootstrap();

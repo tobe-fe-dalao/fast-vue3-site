@@ -52,12 +52,14 @@ fast-vue3/
 ### `packages/@core/shared`
 
 The lowest-level package — **depends on no other workspace packages**:
+
 - Constants (TOKEN_KEY, LOCALE_KEY, etc.)
 - Core TypeScript interfaces (IResponse, RoleType, ViteEnv)
 
 ### `packages/utils`
 
 Pure utility functions, depends only on `@core/shared`:
+
 - Auth: `getToken / setToken / clearToken`
 - Date: `formatDate / formatDateTime`
 - Helpers: `deepMerge / throttle / debounce`
@@ -65,18 +67,21 @@ Pure utility functions, depends only on `@core/shared`:
 ### `packages/stores`
 
 Pinia stores, depends on `@core/shared` and `utils`:
+
 - `useUserStore` — token, userName, avatar, role (persisted)
 - `useAppStore` — theme, locale, collapsed (persisted)
 
 ### `packages/effects/request`
 
 HTTP client, depends on `@core/shared` and `utils`:
+
 - `createHttpClient` — axios instance with interceptors
 - `createRequest` — type-safe `{get, post, put, del}` wrapper
 
 ### `packages/effects/access`
 
 Route guard, depends on `stores`:
+
 - `setupAccessGuard` — global router guard
 - `accessDirective` — `v-access` permission directive
 

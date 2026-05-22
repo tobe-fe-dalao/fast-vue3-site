@@ -20,6 +20,7 @@ export function setupRouter(app: App) {
 ```
 
 守卫逻辑：
+
 1. 路由在白名单中 → 直接放行
 2. 用户已登录（`userStore.isLoggedIn === true`）→ 放行
 3. 用户未登录 → 重定向到 `/login`（携带 `redirect` 参数）
@@ -41,6 +42,6 @@ export function setupRouter(app: App) {
 注册指令：
 
 ```ts
-import { accessDirective } from '@fast-vue3/access';
-app.directive('access', accessDirective);
+import { accessDirective } from "@fast-vue3/access";
+app.directive("access", accessDirective);
 ```

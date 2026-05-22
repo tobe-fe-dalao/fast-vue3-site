@@ -2,13 +2,13 @@
 
 ## 环境要求
 
-| 工具 | 版本要求 |
-|------|---------|
+| 工具    | 版本要求  |
+| ------- | --------- |
 | Node.js | >= 20.0.0 |
-| pnpm | >= 9.5.0 |
-| Git | >= 2.30 |
+| pnpm    | >= 9.5.0  |
+| Git     | >= 2.30   |
 
-> 推荐使用 [Corepack](https://nodejs.org/api/corepack.html) 管理 pnpm 版本：  
+> 推荐使用 [Corepack](https://nodejs.org/api/corepack.html) 管理 pnpm 版本：
 > `corepack enable && corepack prepare pnpm@9.15.9 --activate`
 
 ## 克隆仓库
@@ -25,6 +25,7 @@ pnpm install
 ```
 
 首次安装会自动执行 `prepare` 脚本，该脚本会：
+
 1. 安装 Lefthook Git Hooks
 2. 构建 `@fast-vue3/vite-config`（将 TypeScript 源码编译为 ESM）
 
@@ -93,6 +94,7 @@ pnpm commit
 ```
 
 提交前会自动触发：
+
 - `lint-staged`：对暂存文件运行 ESLint、Prettier、Stylelint
 - `commitlint`：验证 Commit 消息格式
 

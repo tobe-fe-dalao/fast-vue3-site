@@ -5,8 +5,13 @@
 ## 使用方式
 
 ```ts
-import { zhCN, enUS, DEFAULT_LOCALE, SUPPORT_LOCALES } from '@fast-vue3/locales';
-import type { LocaleMessages } from '@fast-vue3/locales';
+import {
+  zhCN,
+  enUS,
+  DEFAULT_LOCALE,
+  SUPPORT_LOCALES,
+} from "@fast-vue3/locales";
+import type { LocaleMessages } from "@fast-vue3/locales";
 ```
 
 ## 语言资源结构
@@ -40,7 +45,7 @@ import type { LocaleMessages } from '@fast-vue3/locales';
 ```ts
 // packages/locales/src/langs/ja-JP/index.ts
 export default {
-  common: { confirm: '確認', cancel: 'キャンセル' },
+  common: { confirm: "確認", cancel: "キャンセル" },
   // ...
 };
 ```
@@ -48,7 +53,7 @@ export default {
 然后在 `index.ts` 中导出：
 
 ```ts
-export { default as jaJP } from './ja-JP';
+export { default as jaJP } from "./ja-JP";
 ```
 
 并在 `packages/@core/shared/src/constants/index.ts` 中添加到 `SUPPORT_LOCALES`。

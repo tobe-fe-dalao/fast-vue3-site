@@ -9,12 +9,12 @@ Fast Vue3 包含 5 个独立的 UI 生态应用，每个应用：
 
 ## 应用列表
 
-| 应用 | UI 框架 | 端口 | 命令 |
-|------|---------|------|------|
-| web-antd | Ant Design Vue 4.x | 3001 | `pnpm dev:antd` |
-| web-ele | Element Plus 2.x | 3002 | `pnpm dev:ele` |
-| web-naive | Naive UI 2.x | 3003 | `pnpm dev:naive` |
-| web-arco | Arco Design Vue 2.x | 3004 | `pnpm dev:arco` |
+| 应用        | UI 框架              | 端口 | 命令               |
+| ----------- | -------------------- | ---- | ------------------ |
+| web-antd    | Ant Design Vue 4.x   | 3001 | `pnpm dev:antd`    |
+| web-ele     | Element Plus 2.x     | 3002 | `pnpm dev:ele`     |
+| web-naive   | Naive UI 2.x         | 3003 | `pnpm dev:naive`   |
+| web-arco    | Arco Design Vue 2.x  | 3004 | `pnpm dev:arco`    |
 | web-tdesign | TDesign Vue Next 1.x | 3005 | `pnpm dev:tdesign` |
 
 ## 共同特征
@@ -22,6 +22,7 @@ Fast Vue3 包含 5 个独立的 UI 生态应用，每个应用：
 所有应用都实现了以下功能：
 
 ### 认证流程
+
 1. 未登录用户访问受保护路由 → 自动重定向到 `/login`
 2. 登录成功 → 获取用户信息 → 进入主布局
 3. 退出登录 → 清除 Token → 重定向到 `/login`
@@ -29,12 +30,15 @@ Fast Vue3 包含 5 个独立的 UI 生态应用，每个应用：
 认证逻辑由 `@fast-vue3/access` 的 `setupAccessGuard` 统一提供。
 
 ### 主布局
+
 所有应用的主布局 `src/views/index.vue` 包含：
+
 - 侧边栏导航（可折叠）
 - 顶部 Header（用户信息 + 退出）
 - 内容区域（`<RouterView />`）
 
 ### 文件路由
+
 使用 `unplugin-vue-router`，`src/views/` 下的 `.vue` 文件自动映射为路由：
 
 ```
@@ -44,6 +48,7 @@ src/views/dashboard/index.vue → /dashboard
 ```
 
 ### Mock 数据
+
 每个应用的 `mock/` 目录提供以下 API Mock：
 
 ```
@@ -64,10 +69,12 @@ POST /api/user/logout   → {}
 
 ```ts
 // web-antd/vite.config.ts
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 export default defineConfig(async () => ({
   application: {
-    uiResolvers: [AntDesignVueResolver({ resolveIcons: true, importStyle: false })],
+    uiResolvers: [
+      AntDesignVueResolver({ resolveIcons: true, importStyle: false }),
+    ],
   },
 }));
 ```

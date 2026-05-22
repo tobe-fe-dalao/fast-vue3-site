@@ -20,8 +20,8 @@ catalog:
 ### 2. vite.config.ts の設定
 
 ```ts
-import { defineConfig } from '@fast-vue3/vite-config';
-import { MyUiResolver } from 'unplugin-vue-components/resolvers';
+import { defineConfig } from "@fast-vue3/vite-config";
+import { MyUiResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig(async () => ({
   application: {

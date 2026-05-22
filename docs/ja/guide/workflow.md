@@ -30,23 +30,23 @@ Conventional Commits 形式を採用。`czg` で対話的にコミット：
 pnpm commit
 ```
 
-| タイプ | 説明 |
-|--------|------|
-| `feat` | 新機能 |
-| `fix` | バグ修正 |
-| `refactor` | リファクタリング |
-| `docs` | ドキュメント |
-| `chore` | ビルド・ツール変更 |
+| タイプ     | 説明               |
+| ---------- | ------------------ |
+| `feat`     | 新機能             |
+| `fix`      | バグ修正           |
+| `refactor` | リファクタリング   |
+| `docs`     | ドキュメント       |
+| `chore`    | ビルド・ツール変更 |
 
 ## API の追加
 
 ```ts
 // src/api/demo/index.ts
-import { http } from '../http';
+import { http } from "../http";
 
 export const demoApi = {
   getList: (params: ListParams) =>
-    http.get<ListResult>({ url: '/demo/list', params }),
+    http.get<ListResult>({ url: "/demo/list", params }),
 };
 ```
 
@@ -60,9 +60,9 @@ src/views/settings/index.vue  →  /settings
 
 ## コード品質
 
-| ツール | 設定パッケージ | タイミング |
-|--------|--------------|-----------|
-| ESLint | `@fast-vue3/eslint-config` | コミット前 |
-| Prettier | `@fast-vue3/prettier-config` | コミット前 |
-| Stylelint | `@fast-vue3/stylelint-config` | コミット前 |
+| ツール     | 設定パッケージ                 | タイミング        |
+| ---------- | ------------------------------ | ----------------- |
+| ESLint     | `@fast-vue3/eslint-config`     | コミット前        |
+| Prettier   | `@fast-vue3/prettier-config`   | コミット前        |
+| Stylelint  | `@fast-vue3/stylelint-config`  | コミット前        |
 | commitlint | `@fast-vue3/commitlint-config` | commit-msg フック |

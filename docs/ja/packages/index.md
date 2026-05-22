@@ -20,14 +20,14 @@
 
 ## パッケージ一覧
 
-| パッケージ | パス | 責任 |
-|-----------|------|------|
-| `@fast-vue3/shared` | `packages/@core/shared` | コア型定義・定数 |
-| `@fast-vue3/utils` | `packages/utils` | 純粋なユーティリティ関数 |
-| `@fast-vue3/stores` | `packages/stores` | Pinia ストア |
-| `@fast-vue3/locales` | `packages/locales` | i18n リソース |
-| `@fast-vue3/request` | `packages/effects/request` | HTTP クライアント |
-| `@fast-vue3/access` | `packages/effects/access` | ルートアクセスガード |
+| パッケージ           | パス                       | 責任                     |
+| -------------------- | -------------------------- | ------------------------ |
+| `@fast-vue3/shared`  | `packages/@core/shared`    | コア型定義・定数         |
+| `@fast-vue3/utils`   | `packages/utils`           | 純粋なユーティリティ関数 |
+| `@fast-vue3/stores`  | `packages/stores`          | Pinia ストア             |
+| `@fast-vue3/locales` | `packages/locales`         | i18n リソース            |
+| `@fast-vue3/request` | `packages/effects/request` | HTTP クライアント        |
+| `@fast-vue3/access`  | `packages/effects/access`  | ルートアクセスガード     |
 
 ## 設計原則
 
@@ -48,11 +48,11 @@
 ## アプリでの使用
 
 ```ts
-import { TOKEN_KEY } from '@fast-vue3/shared';
-import { getToken, formatDate } from '@fast-vue3/utils';
-import { useUserStore } from '@fast-vue3/stores';
-import { createHttpClient, createRequest } from '@fast-vue3/request';
-import { setupAccessGuard } from '@fast-vue3/access';
+import { TOKEN_KEY } from "@fast-vue3/shared";
+import { getToken, formatDate } from "@fast-vue3/utils";
+import { useUserStore } from "@fast-vue3/stores";
+import { createHttpClient, createRequest } from "@fast-vue3/request";
+import { setupAccessGuard } from "@fast-vue3/access";
 ```
 
 各パッケージの詳細な API ドキュメントは個別ページを参照してください。

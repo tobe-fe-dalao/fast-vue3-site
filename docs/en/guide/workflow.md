@@ -35,17 +35,17 @@ pnpm commit
 
 Commit types:
 
-| Type | Description |
-|------|-------------|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `refactor` | Code refactoring |
-| `perf` | Performance improvement |
-| `style` | Code formatting (no logic change) |
-| `test` | Tests |
-| `docs` | Documentation |
-| `chore` | Build/toolchain changes |
-| `ci` | CI config changes |
+| Type       | Description                       |
+| ---------- | --------------------------------- |
+| `feat`     | New feature                       |
+| `fix`      | Bug fix                           |
+| `refactor` | Code refactoring                  |
+| `perf`     | Performance improvement           |
+| `style`    | Code formatting (no logic change) |
+| `test`     | Tests                             |
+| `docs`     | Documentation                     |
+| `chore`    | Build/toolchain changes           |
+| `ci`       | CI config changes                 |
 
 ## Adding API Endpoints
 
@@ -56,14 +56,13 @@ Commit types:
 Example:
 
 ```ts
-import { http } from '../http';
+import { http } from "../http";
 
 export const demoApi = {
   getList: (params: { page: number; size: number }) =>
-    http.get<{ list: Demo[]; total: number }>({ url: '/demo/list', params }),
+    http.get<{ list: Demo[]; total: number }>({ url: "/demo/list", params }),
 
-  create: (data: CreateDemoDto) =>
-    http.post<Demo>({ url: '/demo', data }),
+  create: (data: CreateDemoDto) => http.post<Demo>({ url: "/demo", data }),
 };
 ```
 
@@ -107,11 +106,11 @@ Mocks are enabled via `VITE_USE_MOCK=true` in `.env.development`.
 
 ## Code Quality
 
-| Tool | Config Package | When |
-|------|---------------|------|
-| ESLint | `@fast-vue3/eslint-config` | pre-commit (lint-staged) |
-| Prettier | `@fast-vue3/prettier-config` | pre-commit (lint-staged) |
-| Stylelint | `@fast-vue3/stylelint-config` | pre-commit (lint-staged) |
-| commitlint | `@fast-vue3/commitlint-config` | commit-msg hook |
+| Tool       | Config Package                 | When                     |
+| ---------- | ------------------------------ | ------------------------ |
+| ESLint     | `@fast-vue3/eslint-config`     | pre-commit (lint-staged) |
+| Prettier   | `@fast-vue3/prettier-config`   | pre-commit (lint-staged) |
+| Stylelint  | `@fast-vue3/stylelint-config`  | pre-commit (lint-staged) |
+| commitlint | `@fast-vue3/commitlint-config` | commit-msg hook          |
 
 All rule packages are maintained in `internal/lint-configs/`.

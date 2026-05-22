@@ -7,20 +7,20 @@ Fast Vue3 underwent a complete architectural evolution from **Polyrepo (single r
 ```
 2022 ~ 2024          2025 Q1              2025 Q2 ~ present
 ────────────        ────────────         ────────────────
- Polyrepo phase       Archive phase         Monorepo phase
+ Polyrepo phase       Branch split          Monorepo phase
  Single app           polyrepo branch       main branch rebuilt
- Vite + Vue3          History preserved     Multi-app platform
- Standardization      Archived              5 UI ecosystems
+ Vite + Vue3          Evolves independently Multi-app platform
+ Standardization      Single-app focus      5 UI ecosystems
 ```
 
-## Two Architectures Preserved
+## Two Architectures in Parallel
 
-| Branch | Architecture | Description |
-|--------|-------------|-------------|
-| `polyrepo` | Polyrepo | Historical legacy architecture, archived |
-| `main` | Monorepo | New architecture, actively maintained |
+| Branch     | Architecture | Description                                            |
+| ---------- | ------------ | ------------------------------------------------------ |
+| `polyrepo` | Polyrepo     | Single-repo, single-app architecture, actively maintained |
+| `main`     | Monorepo     | Multi-app platform, continuously evolving              |
 
-The `polyrepo` branch is kept as a historical reference and receives no new feature development. All new work happens on `main`.
+The `polyrepo` and `main` branches **evolve in parallel**, each independently. `polyrepo` represents the best single-repo engineering practices; `main` represents the Monorepo multi-package architecture.
 
 ## Why Migrate
 

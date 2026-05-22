@@ -72,12 +72,12 @@ catalog:
 
 ### 端口分配
 
-| 应用 | UI 框架 | 端口 |
-|------|---------|------|
-| web-antd | Ant Design Vue | 3001 |
-| web-ele | Element Plus | 3002 |
-| web-naive | Naive UI | 3003 |
-| web-arco | Arco Design | 3004 |
+| 应用        | UI 框架          | 端口 |
+| ----------- | ---------------- | ---- |
+| web-antd    | Ant Design Vue   | 3001 |
+| web-ele     | Element Plus     | 3002 |
+| web-naive   | Naive UI         | 3003 |
+| web-arco    | Arco Design      | 3004 |
 | web-tdesign | TDesign Vue Next | 3005 |
 
 ## 应用内部结构

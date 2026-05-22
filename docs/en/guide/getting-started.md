@@ -2,13 +2,13 @@
 
 ## Prerequisites
 
-| Tool | Required Version |
-|------|-----------------|
-| Node.js | >= 20.0.0 |
-| pnpm | >= 9.5.0 |
-| Git | >= 2.30 |
+| Tool    | Required Version |
+| ------- | ---------------- |
+| Node.js | >= 20.0.0        |
+| pnpm    | >= 9.5.0         |
+| Git     | >= 2.30          |
 
-> Recommended: Use [Corepack](https://nodejs.org/api/corepack.html) to manage pnpm:  
+> Recommended: Use [Corepack](https://nodejs.org/api/corepack.html) to manage pnpm:
 > `corepack enable && corepack prepare pnpm@9.15.9 --activate`
 
 ## Clone the Repository
@@ -25,6 +25,7 @@ pnpm install
 ```
 
 The `prepare` script runs automatically on first install and:
+
 1. Installs Lefthook Git Hooks
 2. Builds `@fast-vue3/vite-config` (compiles TypeScript source to ESM)
 
@@ -93,6 +94,7 @@ pnpm commit
 ```
 
 Pre-commit hooks run automatically:
+
 - `lint-staged`: runs ESLint, Prettier, Stylelint on staged files
 - `commitlint`: validates the commit message format
 

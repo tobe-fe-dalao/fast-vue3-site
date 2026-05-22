@@ -2,13 +2,13 @@
 
 ## 必要環境
 
-| ツール | 必要バージョン |
-|--------|--------------|
-| Node.js | >= 20.0.0 |
-| pnpm | >= 9.5.0 |
-| Git | >= 2.30 |
+| ツール  | 必要バージョン |
+| ------- | -------------- |
+| Node.js | >= 20.0.0      |
+| pnpm    | >= 9.5.0       |
+| Git     | >= 2.30        |
 
-> 推奨：[Corepack](https://nodejs.org/api/corepack.html) で pnpm を管理：  
+> 推奨：[Corepack](https://nodejs.org/api/corepack.html) で pnpm を管理：
 > `corepack enable && corepack prepare pnpm@9.15.9 --activate`
 
 ## リポジトリのクローン
@@ -25,6 +25,7 @@ pnpm install
 ```
 
 初回インストール時に `prepare` スクリプトが自動実行され：
+
 1. Lefthook Git Hooks をインストール
 2. `@fast-vue3/vite-config` をビルド（TypeScript ソースを ESM にコンパイル）
 
@@ -93,6 +94,7 @@ pnpm commit
 ```
 
 コミット前に自動で実行：
+
 - `lint-staged`：ステージされたファイルへの ESLint・Prettier・Stylelint
 - `commitlint`：コミットメッセージ形式の検証
 

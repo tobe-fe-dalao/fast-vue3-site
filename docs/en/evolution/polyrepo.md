@@ -1,6 +1,6 @@
-# Polyrepo Historical Architecture
+# Polyrepo Architecture
 
-> This chapter documents the architecture on the `polyrepo` branch. It is archived for reference only and no longer receives new feature development.
+> This chapter documents the architecture on the `polyrepo` branch — representing the best single-repo single-app engineering practices. It is maintained in parallel with the `main` branch.
 
 ## Original Structure
 
@@ -33,24 +33,26 @@ fast-vue3/          ← Single repo, single app
 
 ### Technical Debt
 
-| Issue | Impact |
-|-------|--------|
-| All code mixed under `src/` | Blurred boundaries, hard to extract and reuse |
-| Vite config at root | Cannot be shared across projects |
-| No TypeScript strict mode | Insufficient type safety |
-| No dependency version lock strategy | High upgrade risk |
-| Missing linting toolchain | Inconsistent code quality in team settings |
+| Issue                               | Impact                                        |
+| ----------------------------------- | --------------------------------------------- |
+| All code mixed under `src/`         | Blurred boundaries, hard to extract and reuse |
+| Vite config at root                 | Cannot be shared across projects              |
+| No TypeScript strict mode           | Insufficient type safety                      |
+| No dependency version lock strategy | High upgrade risk                             |
+| Missing linting toolchain           | Inconsistent code quality in team settings    |
 
 ## Phase 1 Improvements
 
 Before archiving, the following standardization work was done:
 
 ### Directory Cleanup
+
 - Reorganized module boundaries under `src/`
 - Unified `api/` layer structure
 - Standardized `store/modules/` naming
 
 ### Engineering Config
+
 - Introduced `eslint.config.mjs` (Flat Config format)
 - Unified Prettier configuration
 - Added Stylelint for Less and Vue files
@@ -58,11 +60,13 @@ Before archiving, the following standardization work was done:
 - Replaced Husky with Lefthook (lighter weight)
 
 ### TypeScript Standardization
+
 - Added global type declarations under `types/`
 - Unified environment variable types (`ImportMetaEnv`)
 - Standardized API response types (`IResponse<T>`)
 
 ### HTTP Layer
+
 - Wrapped axios instance with interceptors
 - Unified error handling (HTTP status code mapping)
 - Standardized API calling pattern (`userApi.login()` over raw axios calls)

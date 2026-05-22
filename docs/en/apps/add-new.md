@@ -30,8 +30,8 @@ mkdir -p apps/web-myui/{mock,types}
 ### 3. Configure vite.config.ts
 
 ```ts
-import { defineConfig } from '@fast-vue3/vite-config';
-import { MyUiResolver } from 'unplugin-vue-components/resolvers';
+import { defineConfig } from "@fast-vue3/vite-config";
+import { MyUiResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig(async () => ({
   application: {

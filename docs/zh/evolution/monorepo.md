@@ -61,8 +61,8 @@ fast-vue3/
 
 ```ts
 // 常量
-export const TOKEN_KEY = 'fast-vue3:token';
-export const DEFAULT_LOCALE = 'zh-CN';
+export const TOKEN_KEY = "fast-vue3:token";
+export const DEFAULT_LOCALE = "zh-CN";
 
 // 类型
 export interface IResponse<T> {
@@ -94,7 +94,7 @@ export interface IResponse<T> {
 依赖 `@core/shared`，提供 i18n 资源：
 
 ```ts
-import { zhCN, enUS } from '@fast-vue3/locales';
+import { zhCN, enUS } from "@fast-vue3/locales";
 ```
 
 ### `packages/effects/request`
@@ -113,7 +113,7 @@ const { get, post, put, del } = createRequest(client);
 依赖 `stores`，提供路由权限守卫：
 
 ```ts
-setupAccessGuard(router, { whiteList: ['/login'] });
+setupAccessGuard(router, { whiteList: ["/login"] });
 ```
 
 ### `internal/vite-config`
@@ -122,11 +122,13 @@ setupAccessGuard(router, { whiteList: ['/login'] });
 
 ```ts
 // apps/web-antd/vite.config.ts
-import { defineConfig } from '@fast-vue3/vite-config';
+import { defineConfig } from "@fast-vue3/vite-config";
 
 export default defineConfig(async () => ({
   application: {
-    uiResolvers: [AntDesignVueResolver({ resolveIcons: true, importStyle: false })],
+    uiResolvers: [
+      AntDesignVueResolver({ resolveIcons: true, importStyle: false }),
+    ],
   },
   vite: { server: { port: 3001 } },
 }));
@@ -141,7 +143,9 @@ export default defineConfig(async () => ({
 `packages/*` 的业务包导出 TypeScript 源码：
 
 ```json
-{ "exports": { ".": { "types": "./src/index.ts", "default": "./src/index.ts" } } }
+{
+  "exports": { ".": { "types": "./src/index.ts", "default": "./src/index.ts" } }
+}
 ```
 
 因为它们只被 Vite 处理的应用代码引用，Vite 可以直接编译 TypeScript，无需预先编译成 JavaScript。好处是修改包代码后 HMR 立即生效，无需手动 rebuild。
@@ -149,7 +153,9 @@ export default defineConfig(async () => ({
 ### 为什么 `internal/vite-config` 需要预编译？
 
 ```json
-{ "exports": { ".": { "types": "./src/index.ts", "import": "./dist/index.js" } } }
+{
+  "exports": { ".": { "types": "./src/index.ts", "import": "./dist/index.js" } }
+}
 ```
 
 `vite.config.ts` 在 Node.js 上下文中执行（不通过 Vite 转换），Node.js ESM 运行时无法直接加载 `.ts` 文件，因此必须编译为 `.js`。

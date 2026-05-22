@@ -20,14 +20,14 @@ The `packages/` directory contains all infrastructure packages shared across UI 
 
 ## Package List
 
-| Package | Path | Responsibility |
-|---------|------|---------------|
-| `@fast-vue3/shared` | `packages/@core/shared` | Core types & constants |
-| `@fast-vue3/utils` | `packages/utils` | Pure utility functions |
-| `@fast-vue3/stores` | `packages/stores` | Pinia stores |
-| `@fast-vue3/locales` | `packages/locales` | i18n resources |
-| `@fast-vue3/request` | `packages/effects/request` | HTTP client |
-| `@fast-vue3/access` | `packages/effects/access` | Route access guard |
+| Package              | Path                       | Responsibility         |
+| -------------------- | -------------------------- | ---------------------- |
+| `@fast-vue3/shared`  | `packages/@core/shared`    | Core types & constants |
+| `@fast-vue3/utils`   | `packages/utils`           | Pure utility functions |
+| `@fast-vue3/stores`  | `packages/stores`          | Pinia stores           |
+| `@fast-vue3/locales` | `packages/locales`         | i18n resources         |
+| `@fast-vue3/request` | `packages/effects/request` | HTTP client            |
+| `@fast-vue3/access`  | `packages/effects/access`  | Route access guard     |
 
 ## Design Principles
 
@@ -36,7 +36,9 @@ The `packages/` directory contains all infrastructure packages shared across UI 
 All `packages/*` use direct TypeScript source exports:
 
 ```json
-{ "exports": { ".": { "types": "./src/index.ts", "default": "./src/index.ts" } } }
+{
+  "exports": { ".": { "types": "./src/index.ts", "default": "./src/index.ts" } }
+}
 ```
 
 This enables instant HMR when modifying package code during development.
@@ -50,10 +52,10 @@ This enables instant HMR when modifying package code during development.
 ## Usage in Apps
 
 ```ts
-import { TOKEN_KEY } from '@fast-vue3/shared';
-import { getToken, formatDate } from '@fast-vue3/utils';
-import { useUserStore } from '@fast-vue3/stores';
-import { zhCN } from '@fast-vue3/locales';
-import { createHttpClient, createRequest } from '@fast-vue3/request';
-import { setupAccessGuard } from '@fast-vue3/access';
+import { TOKEN_KEY } from "@fast-vue3/shared";
+import { getToken, formatDate } from "@fast-vue3/utils";
+import { useUserStore } from "@fast-vue3/stores";
+import { zhCN } from "@fast-vue3/locales";
+import { createHttpClient, createRequest } from "@fast-vue3/request";
+import { setupAccessGuard } from "@fast-vue3/access";
 ```

@@ -35,17 +35,17 @@ pnpm commit
 
 Commit 类型：
 
-| 类型 | 说明 |
-|------|------|
-| `feat` | 新功能 |
-| `fix` | Bug 修复 |
-| `refactor` | 代码重构 |
-| `perf` | 性能优化 |
-| `style` | 代码格式（不影响逻辑） |
-| `test` | 测试相关 |
-| `docs` | 文档更新 |
-| `chore` | 构建/工具链变更 |
-| `ci` | CI 配置变更 |
+| 类型       | 说明                   |
+| ---------- | ---------------------- |
+| `feat`     | 新功能                 |
+| `fix`      | Bug 修复               |
+| `refactor` | 代码重构               |
+| `perf`     | 性能优化               |
+| `style`    | 代码格式（不影响逻辑） |
+| `test`     | 测试相关               |
+| `docs`     | 文档更新               |
+| `chore`    | 构建/工具链变更        |
+| `ci`       | CI 配置变更            |
 
 ## 新增 API 接口
 
@@ -56,14 +56,13 @@ Commit 类型：
 示例：
 
 ```ts
-import { http } from '../http';
+import { http } from "../http";
 
 export const demoApi = {
   getList: (params: { page: number; size: number }) =>
-    http.get<{ list: Demo[]; total: number }>({ url: '/demo/list', params }),
+    http.get<{ list: Demo[]; total: number }>({ url: "/demo/list", params }),
 
-  create: (data: CreateDemoDto) =>
-    http.post<Demo>({ url: '/demo', data }),
+  create: (data: CreateDemoDto) => http.post<Demo>({ url: "/demo", data }),
 };
 ```
 
@@ -107,11 +106,11 @@ Mock 在 `.env.development` 中通过 `VITE_USE_MOCK=true` 开启。
 
 ## 代码规范
 
-| 工具 | 配置包 | 触发时机 |
-|------|--------|---------|
-| ESLint | `@fast-vue3/eslint-config` | commit 前（lint-staged）|
-| Prettier | `@fast-vue3/prettier-config` | commit 前（lint-staged）|
-| Stylelint | `@fast-vue3/stylelint-config` | commit 前（lint-staged）|
-| commitlint | `@fast-vue3/commitlint-config` | commit-msg hook |
+| 工具       | 配置包                         | 触发时机                 |
+| ---------- | ------------------------------ | ------------------------ |
+| ESLint     | `@fast-vue3/eslint-config`     | commit 前（lint-staged） |
+| Prettier   | `@fast-vue3/prettier-config`   | commit 前（lint-staged） |
+| Stylelint  | `@fast-vue3/stylelint-config`  | commit 前（lint-staged） |
+| commitlint | `@fast-vue3/commitlint-config` | commit-msg hook          |
 
 所有规则包统一在 `internal/lint-configs/` 维护。

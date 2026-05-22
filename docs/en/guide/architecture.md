@@ -72,12 +72,12 @@ Other `packages/*` directly export TypeScript source (`"default": "./src/index.t
 
 ### Port Allocation
 
-| App | UI Framework | Port |
-|-----|-------------|------|
-| web-antd | Ant Design Vue | 3001 |
-| web-ele | Element Plus | 3002 |
-| web-naive | Naive UI | 3003 |
-| web-arco | Arco Design | 3004 |
+| App         | UI Framework     | Port |
+| ----------- | ---------------- | ---- |
+| web-antd    | Ant Design Vue   | 3001 |
+| web-ele     | Element Plus     | 3002 |
+| web-naive   | Naive UI         | 3003 |
+| web-arco    | Arco Design      | 3004 |
 | web-tdesign | TDesign Vue Next | 3005 |
 
 ## App Internal Structure

@@ -16,14 +16,14 @@
 
 ```ts
 import {
-  TOKEN_KEY,        // 'fast-vue3:token'
-  TOKEN_PREFIX,     // 'Bearer '
-  LOCALE_KEY,       // 'fast-vue3:locale'
-  THEME_KEY,        // 'fast-vue3:theme'
-  DEFAULT_LOCALE,   // 'zh-CN'
-  SUPPORT_LOCALES,  // ['zh-CN', 'en-US']
-  HTTP_STATUS_MAP,  // HTTP 状态码 → 消息映射
-} from '@fast-vue3/shared';
+  TOKEN_KEY, // 'fast-vue3:token'
+  TOKEN_PREFIX, // 'Bearer '
+  LOCALE_KEY, // 'fast-vue3:locale'
+  THEME_KEY, // 'fast-vue3:theme'
+  DEFAULT_LOCALE, // 'zh-CN'
+  SUPPORT_LOCALES, // ['zh-CN', 'en-US']
+  HTTP_STATUS_MAP, // HTTP 状态码 → 消息映射
+} from "@fast-vue3/shared";
 ```
 
 ## 类型定义
@@ -49,9 +49,9 @@ import type {
 
 ```ts
 interface IResponse<T> {
-  code: number;     // 0 = 成功，非 0 = 业务错误
-  result: T;        // 实际数据
-  message: string;  // 提示信息
+  code: number; // 0 = 成功，非 0 = 业务错误
+  result: T; // 实际数据
+  message: string; // 提示信息
 }
 ```
 
