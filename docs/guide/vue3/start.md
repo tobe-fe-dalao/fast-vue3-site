@@ -1,33 +1,13 @@
-# 启动项目
+---
+search: false
+---
 
-```bash
-# 拉取项目
-git clone https://github.com/tobe-fe-dalao/fast-vue3
+# 文档已按分支整理
 
-# 安装依赖（推荐 pnpm）
-pnpm install
+旧版指南已合并到按分支维护的文档。请先确认你使用的是 main 还是 polyrepo，避免混用目录和脚本。
 
-# 启动开发服务器
-pnpm dev
-
-# 构建生产版本
-pnpm build
-
-# 预览构建结果
-pnpm preview
-```
-
-## 可用脚本
-
-| 命令                  | 说明                            |
-| --------------------- | ------------------------------- |
-| `pnpm dev`            | 启动开发服务器                  |
-| `pnpm build`          | TypeScript 类型检查 + 生产构建  |
-| `pnpm build:dev`      | 开发模式构建                    |
-| `pnpm build:pro`      | 生产模式构建                    |
-| `pnpm preview`        | 预览构建结果                    |
-| `pnpm plop`           | 代码模板生成（页面/组件/Store） |
-| `pnpm lint:eslint`    | ESLint 检查并修复               |
-| `pnpm lint:prettier`  | Prettier 格式化                 |
-| `pnpm lint:stylelint` | Stylelint 检查并修复            |
-| `pnpm commit`         | 规范化 Git 提交                 |
+- [选择分支与快速开始](/zh/guide/getting-started)
+- [Polyrepo 架构与 UI 主题](/zh/polyrepo/ui-theme)
+- [Polyrepo 请求和 Mock](/zh/polyrepo/http-mock)
+- [Main 架构与应用](/zh/monorepo/architecture)
+- [参与文档维护](/zh/guide/workflow)

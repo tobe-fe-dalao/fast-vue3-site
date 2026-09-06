@@ -1,65 +1,11 @@
-# Monorepo 新アーキテクチャ
+# アーキテクチャ
 
-> このページは `main` ブランチの現在のアーキテクチャを説明します。Fast Vue3 の長期的な方向性です。
+Fast-Vue3 は main と polyrepo の並行ブランチを提供します。polyrepo はビルド時に UI を選択する単一 Vue アプリ、main は独立した管理画面とポータルを持つ pnpm/Turbo Workspace です。
 
-## 設計原則
+apps は独立した管理画面とポータル、packages は request/stores/preferences/styles/layout/access/locales と共有型、internal は Vite/TypeScript/lint、scripts は vsh と turbo-run を担当します。
 
-1. **低い長期メンテナンスコスト** — 適切なパッケージ境界、過度な抽象化を避ける
-2. **スケーラビリティ** — 新 UI エコシステム追加 = 1 つのアプリ追加
-3. **共有優先** — インフラは一度書いて全アプリで再利用
-4. **統一ツールチェーン** — 全アプリが同じ lint・tsconfig・vite-config を共有
+workspace:* はローカルパッケージ、catalog: は共通バージョンを参照します。Turbo の dev/build は上流の ^build に依存します。Vite 設定は dist/index.mjs から読み込むため、ツール変更後は stub/build が必要です。
 
-## 完全なディレクトリ構造
+pnpm create-app は admin/site を生成し、ルートに dev/build スクリプトを追加します。main の createHttpClient は Axios インスタンスを返し、createRequest が result を取り出します。polyrepo の ApiError や 204 処理と同一ではありません。
 
-```
-fast-vue3/
-├── apps/                         # UI エコシステムアプリ層
-│   ├── web-antd/                 # Ant Design Vue (ポート 3001)
-│   ├── web-ele/                  # Element Plus (ポート 3002)
-│   ├── web-naive/                # Naive UI (ポート 3003)
-│   ├── web-arco/                 # Arco Design (ポート 3004)
-│   └── web-tdesign/              # TDesign Vue Next (ポート 3005)
-│
-├── packages/                     # 共有ビジネスパッケージ
-│   ├── @core/shared/             # コア型・定数
-│   ├── utils/                    # ユーティリティ関数
-│   ├── stores/                   # Pinia ストア
-│   ├── locales/                  # i18n リソース
-│   └── effects/
-│       ├── request/              # HTTP クライアント
-│       └── access/               # ルートアクセスガード
-│
-├── internal/                     # エンジニアリング基盤
-│   ├── vite-config/              # Vite 設定ファクトリ（事前コンパイル必須）
-│   ├── tsconfig/
-│   └── lint-configs/
-│       ├── eslint-config/
-│       ├── prettier-config/
-│       ├── stylelint-config/
-│       └── commitlint-config/
-│
-├── turbo.json
-└── pnpm-workspace.yaml
-```
-
-## 重要な技術決定の解説
-
-### `packages/*` が TypeScript を直接エクスポートする理由
-
-```json
-{ "default": "./src/index.ts" }
-```
-
-アプリコードは Vite によって処理されるため、Vite が TypeScript を直接コンパイルできます。パッケージを変更した際に即座に HMR が反映されます。
-
-### `internal/vite-config` が事前コンパイルを必要とする理由
-
-```json
-{ "import": "./dist/index.js" }
-```
-
-`vite.config.ts` は Node.js コンテキストで実行されます（Vite のバンドラーを経由しない）。Node.js ESM は `.ts` ファイルを実行できないため、`.js` へのコンパイルが必須です。
-
-### `unocss.config.ts` をルートで共有する理由
-
-全アプリが同じ Atomic CSS プリセット・ショートカット・セーフリストを使用します。一元化することで UI エコシステム間のスタイル不整合を防ぎます。
+[ブランチの選択](/ja/guide/getting-started)

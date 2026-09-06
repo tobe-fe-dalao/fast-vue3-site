@@ -1,39 +1,13 @@
-# Proxy 跨域配置
+---
+search: false
+---
 
-代理配置独立在 `build/vite/proxy.ts` 中，开发环境下通过 Vite 代理转发 API 请求：
+# 文档已按分支整理
 
-```typescript
-// build/vite/proxy.ts
-import {
-  API_BASE_URL,
-  API_TARGET_URL,
-  MOCK_API_BASE_URL,
-  MOCK_API_TARGET_URL,
-} from "../constant";
+旧版指南已合并到按分支维护的文档。请先确认你使用的是 main 还是 polyrepo，避免混用目录和脚本。
 
-export default {
-  [API_BASE_URL]: {
-    target: API_TARGET_URL,
-    changeOrigin: true,
-    rewrite: (path: string) => path.replace(new RegExp(`^${API_BASE_URL}`), ""),
-  },
-  [MOCK_API_BASE_URL]: {
-    target: MOCK_API_TARGET_URL,
-    changeOrigin: true,
-    rewrite: (path: string) =>
-      path.replace(new RegExp(`^${MOCK_API_BASE_URL}`), "/api"),
-  },
-};
-```
-
-常量定义在 `build/constant.ts` 中：
-
-```typescript
-export const API_PREFIX = "/api";
-export const API_BASE_URL = "/api";
-export const API_TARGET_URL = "http://localhost:3000";
-export const MOCK_API_BASE_URL = "/mock/api";
-export const MOCK_API_TARGET_URL = "http://localhost:3000";
-```
-
-修改 `API_TARGET_URL` 为你的后端服务地址即可。
+- [选择分支与快速开始](/zh/guide/getting-started)
+- [Polyrepo 架构与 UI 主题](/zh/polyrepo/ui-theme)
+- [Polyrepo 请求和 Mock](/zh/polyrepo/http-mock)
+- [Main 架构与应用](/zh/monorepo/architecture)
+- [参与文档维护](/zh/guide/workflow)

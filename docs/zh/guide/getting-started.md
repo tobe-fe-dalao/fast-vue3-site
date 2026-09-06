@@ -1,134 +1,41 @@
-# 快速上手
+# 先选分支，再开始开发
 
-## 环境要求
+Fast-Vue3 提供两条并行路径。`polyrepo` 是这个项目的分支名称，实际形态是**单仓单应用**；`main` 则在一个 Workspace 中维护多套应用。它们不是可以混用脚本与目录结构的两个版本。
 
-| 工具    | 版本要求  |
-| ------- | --------- |
-| Node.js | >= 20.0.0 |
-| pnpm    | >= 9.5.0  |
-| Git     | >= 2.30   |
+| 对比 | `polyrepo` | `main` |
+| --- | --- | --- |
+| 入口 | 根目录 `src/main.ts` | `apps/*/src/main.ts` |
+| UI 选择 | `.env` 中 `VITE_UI_FRAMEWORK` | 选择 `web-*` / `site-*` 应用 |
+| 开发命令 | `pnpm dev`、`pnpm dev:antd` | `pnpm dev:web-antd`、`pnpm dev:site-antd` |
+| 主要场景 | 单应用开发、组件比较、轻量模板 | 多后台/门户并行开发、共享基础设施 |
+| 组件库差异 | 包含 DevUI；不包含 PrimeVue | 包含 PrimeVue；不包含 DevUI |
+| Mock | Vite 开发插件 | Nitro 服务 `apps/backend-mock` |
+| 样式基础 | UnoCSS + Less + `--fv-*` | 共享 styles + Tailwind + 各应用主题 |
 
-> 推荐使用 [Corepack](https://nodejs.org/api/corepack.html) 管理 pnpm 版本：
-> `corepack enable && corepack prepare pnpm@9.15.9 --activate`
+建议使用 Node 22.18 或更新的受支持版本。`polyrepo` 明确要求 Node ≥22.18；`main/package.json` 的声明为 ≥20.12，但依赖工具可能有更高要求，不能仅按根声明判断。pnpm 版本分别由各分支 `packageManager` 指定（polyrepo 9.15.4、main 9.15.9）。
 
-## 克隆仓库
+## 独立检出
 
-```bash
-git clone https://github.com/tobe-fe-dalao/fast-vue3.git
-cd fast-vue3
+```sh
+git clone -b polyrepo https://github.com/tobe-fe-dalao/fast-vue3.git fast-vue3-polyrepo
+cd fast-vue3-polyrepo
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
-## 安装依赖
+默认打开 `http://127.0.0.1:5173/`。本地 Mock 演示账号为 `test / test`。
 
-```bash
-pnpm install
+```sh
+git clone -b main https://github.com/tobe-fe-dalao/fast-vue3.git fast-vue3-main
+cd fast-vue3-main
+pnpm install --frozen-lockfile
+pnpm dev:web-antd
 ```
 
-首次安装会自动执行 `prepare` 脚本，该脚本会：
+main 的后台 Mock 账号为 `admin / 123456` 或 `user / 123456`，与 polyrepo 不同。门户页面主要是模板演示，请逐应用确认接口行为。
 
-1. 安装 Lefthook Git Hooks
-2. 构建 `@fast-vue3/vite-config`（将 TypeScript 源码编译为 ESM）
+## 下一步
 
-## 启动开发服务器
-
-每个 UI 生态系统对应一个独立的 dev 命令：
-
-```bash
-# Ant Design Vue (port 3001)
-pnpm dev:antd
-
-# Element Plus (port 3002)
-pnpm dev:ele
-
-# Naive UI (port 3003)
-pnpm dev:naive
-
-# Arco Design (port 3004)
-pnpm dev:arco
-
-# TDesign Vue Next (port 3005)
-pnpm dev:tdesign
-```
-
-Turbo 会自动在启动应用前先构建其依赖项（`@fast-vue3/vite-config`）。
-
-## 构建生产版本
-
-```bash
-# 构建所有应用
-pnpm build
-
-# 构建单个应用
-pnpm build:antd
-pnpm build:ele
-pnpm build:naive
-pnpm build:arco
-pnpm build:tdesign
-```
-
-## 类型检查
-
-```bash
-pnpm typecheck
-```
-
-## 代码规范检查
-
-```bash
-# 检查
-pnpm lint
-
-# 自动修复
-pnpm lint:fix
-
-# 格式化
-pnpm format
-```
-
-## 提交代码
-
-使用 `czg` 提供交互式 Commit 向导：
-
-```bash
-pnpm commit
-```
-
-提交前会自动触发：
-
-- `lint-staged`：对暂存文件运行 ESLint、Prettier、Stylelint
-- `commitlint`：验证 Commit 消息格式
-
-## 清理构建产物
-
-```bash
-pnpm clean
-```
-
-该命令会递归删除所有工作区包中的 `dist/`、`.turbo/`、`node_modules/`、`.cache/` 目录。
-
-## 目录结构
-
-```
-fast-vue3/
-├── apps/                    # 各 UI 生态应用
-│   ├── web-antd/            # Ant Design Vue 应用（port 3001）
-│   ├── web-ele/             # Element Plus 应用（port 3002）
-│   ├── web-naive/           # Naive UI 应用（port 3003）
-│   ├── web-arco/            # Arco Design 应用（port 3004）
-│   └── web-tdesign/         # TDesign Vue Next 应用（port 3005）
-├── packages/                # 共享业务包
-│   ├── @core/shared/        # 核心类型定义与常量
-│   ├── utils/               # 工具函数
-│   ├── stores/              # Pinia 状态管理
-│   ├── locales/             # 国际化资源
-│   └── effects/
-│       ├── request/         # HTTP 请求封装
-│       └── access/          # 权限路由守卫
-├── internal/                # 工程内部包
-│   ├── vite-config/         # 统一 Vite 配置工厂
-│   ├── tsconfig/            # TypeScript 基础配置
-│   └── lint-configs/        # Lint 规则包
-├── scripts/                 # 工程脚本
-├── turbo.json               # Turbo 任务编排配置
-└── pnpm-workspace.yaml      # pnpm workspace + catalog 配置
-```
+- [Polyrepo 开发指南](/zh/polyrepo/getting-started)
+- [Monorepo 架构](/zh/monorepo/architecture)
+- [实际应用清单](/zh/apps/)

@@ -1,17 +1,13 @@
-# 参与编辑
+---
+search: false
+---
 
-欢迎有意愿参与到开源的朋友，加入到本文档的编写，书写文档不仅是教会别人知识，更是用自己的表达方式概括自己所学习知识的一种方式，这对个人来说是不错的成长机会。
+# 文档已按分支整理
 
-```bash
-# 拉取项目
-git clone https://github.com/tobe-fe-dalao/fast-vue3-site
+旧版指南已合并到按分支维护的文档。请先确认你使用的是 main 还是 polyrepo，避免混用目录和脚本。
 
-# 切换分支
-git checkout -b docs origin/docs
-
-# 安装依赖
-pnpm install
-
-# 启动项目
-pnpm start
-```
+- [选择分支与快速开始](/zh/guide/getting-started)
+- [Polyrepo 架构与 UI 主题](/zh/polyrepo/ui-theme)
+- [Polyrepo 请求和 Mock](/zh/polyrepo/http-mock)
+- [Main 架构与应用](/zh/monorepo/architecture)
+- [参与文档维护](/zh/guide/workflow)

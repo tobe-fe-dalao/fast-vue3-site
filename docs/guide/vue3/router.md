@@ -1,62 +1,13 @@
-# Vue Router
+---
+search: false
+---
 
-项目使用 **Vue Router 4** + **unplugin-vue-router** 实现文件路由（File-Based Routing），无需手动注册路由。
+# 文档已按分支整理
 
-## 文件路由
+旧版指南已合并到按分支维护的文档。请先确认你使用的是 main 还是 polyrepo，避免混用目录和脚本。
 
-路由根据 `src/views/` 目录结构自动生成：
-
-```bash
-src/views/
-├── index.vue           → /
-├── login/
-│   └── index.vue       → /login
-├── component/
-│   └── index.vue       → /component
-├── contain/
-│   └── index.vue       → /contain
-└── demo/
-    └── index.vue       → /demo
-```
-
-自动生成的类型化路由定义在 `types/typed-router.d.ts` 中。
-
-## 路由配置
-
-```typescript
-// src/router/index.ts
-import { createRouter, createWebHashHistory } from "vue-router";
-import { routes } from "vue-router/auto-routes";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-
-const baseURL = import.meta.env.VITE_BASE_URL;
-
-const router = createRouter({
-  history: createWebHashHistory(baseURL),
-  routes,
-});
-
-// 路由守卫 - 进度条
-router.beforeEach(async (_to, _from, next) => {
-  NProgress.start();
-  next();
-});
-
-router.afterEach(() => {
-  NProgress.done();
-});
-
-export default router;
-```
-
-## 创建新页面
-
-使用 Plop 模板生成器快速创建页面：
-
-```bash
-pnpm plop
-# 选择 "page" → 选择目录 → 输入文件名
-```
-
-或手动在 `src/views/` 下创建 `.vue` 文件，路由将自动注册。
+- [选择分支与快速开始](/zh/guide/getting-started)
+- [Polyrepo 架构与 UI 主题](/zh/polyrepo/ui-theme)
+- [Polyrepo 请求和 Mock](/zh/polyrepo/http-mock)
+- [Main 架构与应用](/zh/monorepo/architecture)
+- [参与文档维护](/zh/guide/workflow)

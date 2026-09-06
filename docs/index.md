@@ -1,48 +1,36 @@
 ---
 layout: home
-
-title: Fast Vue3
-titleTemplate: Vue3 Monorepo 工程平台
-
+title: Fast-Vue3
+titleTemplate: Frontend applications and reference backend
 hero:
-  name: Fast Vue3
-  text: Vue3 Monorepo 工程平台
-  tagline: 集成 5 大主流 Admin UI 生态系统，专注工程架构与长期可维护性
+  name: Fast-Vue3
+  text: Frontend applications and reference backend.
+  tagline: Choose the focused polyrepo application or collaborative main workspace, then connect it to the shared Spring Boot server contract.
   image:
-    src: /logo.png
-    alt: Fast Vue3
+    src: /logo.svg
+    alt: Fast-Vue3
   actions:
     - theme: brand
-      text: 快速上手
-      link: /zh/guide/getting-started
+      text: Choose a branch
+      link: /en/guide/getting-started
     - theme: alt
-      text: 架构演进
-      link: /zh/evolution/
+      text: Polyrepo guide
+      link: /en/polyrepo/
     - theme: alt
-      text: GitHub
-      link: https://github.com/tobe-fe-dalao/fast-vue3
-
+      text: Main workspace
+      link: /en/monorepo/
+    - theme: alt
+      text: Server guide
+      link: /en/server/
 features:
-  - icon: 🏗️
-    title: Monorepo 工程架构
-    details: 基于 pnpm workspace + Turborepo，统一版本管理与构建编排，支持多应用并行开发
-  - icon: 🎨
-    title: 多 UI 生态集成
-    details: 同时支持 Ant Design Vue、Element Plus、Naive UI、Arco Design、TDesign，每套 UI 独立运行
-  - icon: 📦
-    title: 共享基础设施
-    details: request / stores / utils / locales / access 等基础包在所有应用间共享，避免重复造轮子
-  - icon: ⚡
-    title: Vite 7 + TypeScript 5
-    details: 极速开发体验，完整类型安全，unplugin-vue-router 文件路由，unplugin-auto-import 自动导入
-  - icon: 🔧
-    title: 工程规范
-    details: ESLint Flat Config + Prettier + Stylelint + Lefthook + Commitlint，全链路代码质量保障
-  - icon: 🚀
-    title: 长期可维护
-    details: 合理的包边界划分，低耦合高内聚，专注降低长期维护成本而非短期便利
----
-
-    details: 加入我们，更多能力等你挖掘....
-
+  - title: One application, selectable UI
+    details: Polyrepo selects component, theme, and login adapters at build time while keeping business modules focused.
+  - title: Many applications, shared infrastructure
+    details: Main separates admin, portal, and mock applications and coordinates shared packages with pnpm and Turbo.
+  - title: Mock and real API parity
+    details: One typed client targets Nitro during UI work and Spring Boot during full integration.
+  - title: One server reference
+    details: The Spring Boot service documents authentication, RBAC, content, deployment, and the shared API contract in this site.
+  - title: English-first, translated
+    details: English is the canonical documentation, with Simplified Chinese, Traditional Chinese (Taiwan and Hong Kong), and Japanese translations.
 ---

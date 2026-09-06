@@ -1,84 +1,30 @@
-# 应用概览
+# Main 应用清单
 
-Fast Vue3 包含 5 个独立的 UI 生态应用，每个应用：
+本页只描述 `main` 分支。包含七个 `web-*` 后台、七个 `site-*` 门户、通用 `web-app` 和一个 Nitro Mock 服务，共 16 个应用。
 
-- 有独立的路由系统
-- 有独立的布局和主题
-- 共享所有 `packages/*` 基础设施
-- 运行在独立端口上
+| 应用 | 开发命令 | 开发端口声明 |
+| --- | --- | --- |
+| `backend-mock` | `pnpm dev:backend-mock` | — |
+| `site-antd` | `pnpm dev:site-antd` | — |
+| `site-arco` | `pnpm dev:site-arco` | — |
+| `site-ele` | `pnpm dev:site-ele` | — |
+| `site-idux` | `pnpm dev:site-idux` | — |
+| `site-naive` | `pnpm dev:site-naive` | — |
+| `site-primevue` | `pnpm dev:site-primevue` | — |
+| `site-tdesign` | `pnpm dev:site-tdesign` | — |
+| `web-antd` | `pnpm dev:web-antd` | 3001 |
+| `web-app` | `pnpm dev:web-app` | 3008 |
+| `web-arco` | `pnpm dev:web-arco` | 3002 |
+| `web-ele` | `pnpm dev:web-ele` | 3003 |
+| `web-idux` | `pnpm dev:web-idux` | 3007 |
+| `web-naive` | `pnpm dev:web-naive` | 3004 |
+| `web-primevue` | `pnpm dev:web-primevue` | 3006 |
+| `web-tdesign` | `pnpm dev:web-tdesign` | 3005 |
 
-## 应用列表
+端口来自应用 `.env.development`；“—”表示未在该文件声明，不应把共享配置默认值当成独立保留端口。以启动输出为准。
 
-| 应用        | UI 框架              | 端口 | 命令               |
-| ----------- | -------------------- | ---- | ------------------ |
-| web-antd    | Ant Design Vue 4.x   | 3001 | `pnpm dev:antd`    |
-| web-ele     | Element Plus 2.x     | 3002 | `pnpm dev:ele`     |
-| web-naive   | Naive UI 2.x         | 3003 | `pnpm dev:naive`   |
-| web-arco    | Arco Design Vue 2.x  | 3004 | `pnpm dev:arco`    |
-| web-tdesign | TDesign Vue Next 1.x | 3005 | `pnpm dev:tdesign` |
+后台涵盖 Ant Design Vue、Arco、Element Plus、iDux、Naive UI、PrimeVue 和 TDesign。Polyrepo 的 DevUI 不属于本清单。
 
-## 共同特征
+`site-*` 是带首页、产品、定价、文章、FAQ 等页面的门户模板，和后台 web-* 独立运行。`web-app` 是通用站点式应用。
 
-所有应用都实现了以下功能：
-
-### 认证流程
-
-1. 未登录用户访问受保护路由 → 自动重定向到 `/login`
-2. 登录成功 → 获取用户信息 → 进入主布局
-3. 退出登录 → 清除 Token → 重定向到 `/login`
-
-认证逻辑由 `@fast-vue3/access` 的 `setupAccessGuard` 统一提供。
-
-### 主布局
-
-所有应用的主布局 `src/views/index.vue` 包含：
-
-- 侧边栏导航（可折叠）
-- 顶部 Header（用户信息 + 退出）
-- 内容区域（`<RouterView />`）
-
-### 文件路由
-
-使用 `unplugin-vue-router`，`src/views/` 下的 `.vue` 文件自动映射为路由：
-
-```
-src/views/index.vue       → /
-src/views/login/index.vue → /login
-src/views/dashboard/index.vue → /dashboard
-```
-
-### Mock 数据
-
-每个应用的 `mock/` 目录提供以下 API Mock：
-
-```
-POST /api/user/login    → { token: 'mock-token-xxx' }
-GET  /api/user/profile  → { userName, avatar, role }
-POST /api/user/logout   → {}
-```
-
-## UI 隔离策略
-
-各应用的 UI 组件**不会互相干扰**：
-
-- Element Plus 组件只在 `web-ele` 中使用
-- Ant Design Vue 组件只在 `web-antd` 中使用
-- 自动按需引入，不会打包未使用的 UI 组件
-
-组件自动引入通过各 app 的 `vite.config.ts` 中传入的 resolver 实现：
-
-```ts
-// web-antd/vite.config.ts
-import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
-export default defineConfig(async () => ({
-  application: {
-    uiResolvers: [
-      AntDesignVueResolver({ resolveIcons: true, importStyle: false }),
-    ],
-  },
-}));
-```
-
-## 接入新的 UI 生态
-
-参见 [接入新 UI 库](./add-new)。
+[新增应用](/zh/apps/add-new) · [架构](/zh/monorepo/architecture)

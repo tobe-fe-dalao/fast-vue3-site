@@ -1,63 +1,11 @@
 # @fast-vue3/stores
 
-基于 Pinia 的状态管理，包含用户和应用两个核心 store，所有状态自动持久化。
+适用分支：`main`。路径：`packages/stores`。
 
-## 初始化
+setupStore、useAppStore、useUserStore，组合 Pinia 与持久化。
 
-在 `main.ts` 中调用：
+入口先 `setupStore(app)`，再使用 useUserStore。用户 Store 暴露 setUserInfo、setToken、logout，持久化 token/userName/avatar/role；接口请求由应用编排。
 
-```ts
-import { setupStore } from "@fast-vue3/stores";
-setupStore(app); // 创建 Pinia 实例 + 注册 persistedstate 插件
-```
+[源码：`packages/stores/src/index.ts`](https://github.com/tobe-fe-dalao/fast-vue3/blob/main/packages/stores/src/index.ts)
 
-## useUserStore
-
-```ts
-import { useUserStore } from "@fast-vue3/stores";
-const userStore = useUserStore();
-
-// State
-userStore.token; // string | null
-userStore.userName; // string | null
-userStore.avatar; // string | null
-userStore.role; // RoleType | null
-
-// Getters
-userStore.isLoggedIn; // boolean
-userStore.isAdmin; // boolean
-
-// Actions
-userStore.setToken(token);
-userStore.setUserInfo({ userName, avatar, role });
-userStore.logout(); // 清除所有用户状态
-```
-
-持久化字段：`token`、`userName`、`avatar`、`role`（存入 localStorage）。
-
-## useAppStore
-
-```ts
-import { useAppStore } from "@fast-vue3/stores";
-const appStore = useAppStore();
-
-// State
-appStore.theme; // 'light' | 'dark'
-appStore.locale; // 'zh-CN' | 'en-US'
-appStore.collapsed; // boolean（侧边栏折叠状态）
-
-// Actions
-appStore.setTheme(theme);
-appStore.setLocale(locale);
-appStore.toggleCollapsed();
-```
-
-持久化字段：`theme`、`locale`（存入 localStorage）。
-
-## 其他导出
-
-```ts
-import { defineStore, storeToRefs } from "@fast-vue3/stores";
-// Pinia 的 defineStore 和 storeToRefs 直接从此包重导出
-// 避免在各 app 中直接依赖 pinia
-```
+[返回包清单](/zh/packages/)

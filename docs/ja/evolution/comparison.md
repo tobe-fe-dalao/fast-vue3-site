@@ -1,48 +1,11 @@
-# アーキテクチャ比較
+# アーキテクチャ
 
-Polyrepo と Monorepo の多次元比較。
+Fast-Vue3 は main と polyrepo の並行ブランチを提供します。polyrepo はビルド時に UI を選択する単一 Vue アプリ、main は独立した管理画面とポータルを持つ pnpm/Turbo Workspace です。
 
-## サマリー
+apps は独立した管理画面とポータル、packages は request/stores/preferences/styles/layout/access/locales と共有型、internal は Vite/TypeScript/lint、scripts は vsh と turbo-run を担当します。
 
-| 次元                   | Polyrepo                   | Monorepo                                   |
-| ---------------------- | -------------------------- | ------------------------------------------ |
-| リポジトリ構造         | 単一リポジトリ・単一アプリ | 単一リポジトリ・複数パッケージ・複数アプリ |
-| バージョン管理         | 単一 package.json          | pnpm workspace catalog                     |
-| ビルドツール           | 直接 vite                  | turbo + vite                               |
-| コード再利用           | 手動コピー                 | workspace パッケージ参照                   |
-| UI 拡張                | フォークまたはコピー       | apps/ に追加                               |
-| パッケージ境界         | なし（src/ 混在）          | 明確（パッケージ階層）                     |
-| 導入コスト             | 低                         | 中                                         |
-| 長期メンテナンスコスト | 高                         | 低                                         |
+workspace:* はローカルパッケージ、catalog: は共通バージョンを参照します。Turbo の dev/build は上流の ^build に依存します。Vite 設定は dist/index.mjs から読み込むため、ツール変更後は stub/build が必要です。
 
-## Polyrepo が適している場面
+pnpm create-app は admin/site を生成し、ルートに dev/build スクリプトを追加します。main の createHttpClient は Axios インスタンスを返し、createRequest が result を取り出します。polyrepo の ApiError や 204 処理と同一ではありません。
 
-- 単一製品・複数 UI 不要
-- 小チームまたは個人プロジェクト
-- 素早いプロトタイプ検証
-- プロジェクト横断のコード再利用不要
-
-## Monorepo が適している場面
-
-- 複数 UI フレームワークまたは製品ラインのサポート
-- 再利用可能な共有インフラが多い
-- 統一されたエンジニアリング標準が必要なチーム開発
-- 長期的な保守性を重視
-- ビルドキャッシュとタスク並列化が必要
-
-## 移行コスト
-
-| 項目                  | 工数   | 一回限り/継続 |
-| --------------------- | ------ | ------------- |
-| pnpm workspace の理解 | 小     | 一回限り      |
-| Turbo 設定            | 小     | 一回限り      |
-| パッケージ分割        | 中     | 一回限り      |
-| 既存コードの移行      | 中〜大 | 一回限り      |
-
-移行後：新 UI アプリ追加・共有インフラアップグレードの追加コストはほぼゼロに近づきます。
-
-## 結論
-
-> 「複数 UI エコシステム + 共有インフラ + 長期進化」のシナリオでは、Monorepo がより適切な選択です。
-
-Fast Vue3 の移行は新技術への追従ではなく、エンジニアリング規模と要件に自然に駆動された結果です。Monorepo は「バージョン一貫性・コード再利用・エンジニアリング統一」をアーキテクチャレベルの保証にします。
+[ブランチの選択](/ja/guide/getting-started)

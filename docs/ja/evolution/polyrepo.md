@@ -1,65 +1,11 @@
-# Polyrepo 旧アーキテクチャ
+# アーキテクチャ
 
-> このページは `polyrepo` ブランチのアーキテクチャを記録しています。参照専用のアーカイブです。
+Fast-Vue3 は main と polyrepo の並行ブランチを提供します。polyrepo はビルド時に UI を選択する単一 Vue アプリ、main は独立した管理画面とポータルを持つ pnpm/Turbo Workspace です。
 
-## 元のディレクトリ構造
+依存方向は ページ → Store → API → HTTP です。config/ui.ts を基準に、Vite の別名で初期化、テーマ Provider、ログインフォーム、展示コンポーネントを選択します。all モードは 7 種の展示を組み合わせ、ログインには Element Plus を使用します。
 
-```
-fast-vue3/          ← 単一リポジトリ・単一アプリ
-├── src/
-│   ├── api/user/
-│   ├── assets/
-│   ├── components/
-│   ├── hooks/
-│   ├── layout/
-│   ├── router/
-│   ├── store/modules/
-│   ├── utils/http/axios/
-│   └── views/
-├── build/vite/plugins/
-├── mock/
-├── types/
-├── vite.config.mts
-└── package.json
-```
+アプリ自身の --fv-* 変数とレスポンシブレイアウトを使い、UI ライブラリの reset に依存しません。Ant Design/Naive/iDux は Provider、Element Plus/Arco/TDesign はテーマセレクター、DevUI はテーマサービスで切り替えます。
 
-## 技術的負債
+pnpm check と各モードのビルドに加え、モバイル幅、明暗テーマ、キーボード入力も確認します。Mock の /api/user/* は開発時のみ有効です。
 
-| 問題                         | 影響                           |
-| ---------------------------- | ------------------------------ |
-| `src/` 下に全コードが混在    | 境界不明確、抽出・再利用が困難 |
-| Vite 設定がルートに直書き    | プロジェクト間で共有不可       |
-| TypeScript strict モードなし | 型安全性が不十分               |
-| 依存バージョン固定戦略なし   | アップグレードリスク高         |
-| Lint ツールチェーン未整備    | チーム開発で品質が不均一       |
-
-## Phase 1 での改善内容
-
-アーカイブ前に実施した標準化作業：
-
-- **ディレクトリ整理** — `src/` 下のモジュール境界を再整理
-- **ESLint Flat Config 導入** — `eslint.config.mjs`
-- **Prettier・Stylelint 統一**
-- **commitlint + czg** — コンベンショナルコミット対応
-- **Lefthook 導入** — Husky の軽量代替
-- **TypeScript 型補完** — `types/` 下のグローバル型宣言
-
-## アーカイブ手順
-
-```bash
-git checkout -b polyrepo
-git tag v0.3.0-polyrepo-final
-git checkout main
-```
-
-## 限界まとめ
-
-Polyrepo では対応困難な場面：
-
-1. 複数 UI フレームワークのサポート
-2. チーム協業での明確な責務分担
-3. 依存バージョンの一元管理
-4. コードの横断的な再利用
-5. 構築キャッシュとタスク並列化
-
-これらがMonorepoへの移行を推進した根本的な要因です。
+[ブランチの選択](/ja/guide/getting-started)

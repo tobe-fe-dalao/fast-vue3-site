@@ -1,41 +1,41 @@
-# Fast-Vue3 文档站
+# Fast Vue3 Documentation
 
-[Fast-Vue3](https://github.com/tobe-fe-dalao/fast-vue3) 的文档站，基于 VitePress 构建。
+[English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文（台灣）](README.zh-TW.md) | [繁體中文（香港）](README.zh-HK.md) | [日本語](README.ja.md)
 
-## 本地开发
+This VitePress site is the single documentation home for the Fast Vue3 ecosystem:
+
+- `main`: a pnpm/Turbo monorepo with independent admin, portal, and Nitro mock applications;
+- `polyrepo`: a focused Vue application with build-time UI-library selection.
+- `fast-vue3-server`: the Spring Boot reference backend and shared `/api/v1` contract.
+
+Published site: <https://tobe-fe-dalao.github.io/fast-vue3-site/>
+
+English is the canonical documentation language. Simplified Chinese, Traditional Chinese (Taiwan and Hong Kong), and Japanese translations are available from the language menu.
+
+## Requirements
+
+- Node.js 22.18 or newer
+- pnpm 9.15.4
+
+## Commands
 
 ```bash
-pnpm install
-pnpm start
-```
-
-## 构建
-
-```bash
+pnpm install --frozen-lockfile
+pnpm dev
 pnpm build
+pnpm preview
 ```
 
-## 文档结构
+The local URL is `http://127.0.0.1:5174/fast-vue3-site/`. Generated `.vitepress/cache` and `.vitepress/dist` files must not be committed.
 
-```
-docs/
-├── index.md              # 首页
-├── guide/
-│   ├── index.md          # 介绍
-│   ├── start.md          # 快速上手
-│   ├── edit.md           # 参与编辑
-│   └── vue3/
-│       ├── start.md      # 启动项目
-│       ├── base.md       # Vite 基础配置
-│       ├── vite.md       # Vite 插件集成
-│       ├── env.md        # 多环境变量
-│       ├── ui.md         # UI 组件库
-│       ├── pinia.md      # Pinia 状态管理
-│       ├── router.md     # Vue Router
-│       ├── axios.md      # Axios 封装
-│       ├── alias.md      # 路径别名
-│       ├── proxy.md      # 代理配置
-│       └── lint.md       # 代码规范
-└── .vitepress/
-    └── config.js         # VitePress 配置
-```
+## Content map
+
+- `docs/en`: canonical guides for branch selection, architecture, application development, mock API, real backend integration, and testing;
+- `docs/<locale>/server`: backend setup, configuration, testing, authentication, RBAC, content, and API contracts migrated from `fast-vue3-server`;
+- `docs/zh`: Chinese translations and expanded package/application references;
+- `docs/ja`: Japanese translations;
+- `docs/guide`: compatibility notices for legacy links.
+
+The default deployment base is `/fast-vue3-site/`. Use `DOCS_BASE=/ pnpm build` for a root-domain deployment.
+
+All long-form project documentation belongs here; application and server repositories should keep concise README files that link to the relevant pages. API documentation follows the real contract shared by `fast-vue3`, its Nitro mock, and `fast-vue3-server`. Public site reads are anonymous; admin operations, blog comment submission, and pricing checkout require authentication.

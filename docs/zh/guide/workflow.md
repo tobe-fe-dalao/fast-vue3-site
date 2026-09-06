@@ -1,116 +1,31 @@
 # 开发工作流
 
-## 日常开发
+## 改动前
 
-### 启动单个应用
+先运行 `git branch --show-current` 确认分支。切换分支前保存工作区改动，切换后按目标分支 lockfile 重新安装依赖。不要共享或复制另一分支的 `node_modules`。
 
-```bash
-pnpm dev:antd   # Ant Design Vue
-pnpm dev:ele    # Element Plus
-pnpm dev:naive  # Naive UI
-pnpm dev:arco   # Arco Design
-pnpm dev:tdesign # TDesign
+## Polyrepo
+
+```sh
+pnpm dev:antd
+pnpm check
+pnpm build:antd
+pnpm build
 ```
 
-Turbo 的 `dev` 任务会先确保 `@fast-vue3/vite-config` 构建完成，再启动 Vite 开发服务器。
+`pnpm check` 执行 ESLint、浏览器/Node 两侧类型检查和 Node 原生回归测试。单 UI 构建不等于已经验证浏览器行为；涉及样式还需在桌面、窄屏和两种主题下检查。
 
-### 修改共享包
+## Main
 
-`packages/*` 中的包直接暴露 TypeScript 源码，由各 app 的 Vite 实例在运行时编译。修改后无需重建，HMR 直接生效。
-
-唯一的例外是 `internal/vite-config`：修改后需要重新构建：
-
-```bash
-pnpm -F @fast-vue3/vite-config build
-# 或重启 pnpm dev:xxx（turbo 会自动先 build 依赖）
+```sh
+pnpm dev:web-antd
+pnpm lint
+pnpm typecheck
+pnpm build:web-antd
 ```
 
-## 提交规范
+修改 vsh CLI 源码后执行 `pnpm -F @fast-vue3/vsh run stub`，修改共享 Vite 工具后执行 `pnpm -F @fast-vue3/vite-config run stub`。根目录安装后也会递归运行可用的 stub 脚本。
 
-使用 Conventional Commits 规范，通过 `czg` 交互式向导提交：
+## 文档协作
 
-```bash
-pnpm commit
-```
-
-Commit 类型：
-
-| 类型       | 说明                   |
-| ---------- | ---------------------- |
-| `feat`     | 新功能                 |
-| `fix`      | Bug 修复               |
-| `refactor` | 代码重构               |
-| `perf`     | 性能优化               |
-| `style`    | 代码格式（不影响逻辑） |
-| `test`     | 测试相关               |
-| `docs`     | 文档更新               |
-| `chore`    | 构建/工具链变更        |
-| `ci`       | CI 配置变更            |
-
-## 新增 API 接口
-
-1. 在 `apps/{app}/src/api/` 下创建或修改接口文件
-2. 调用 `http.get/post/put/del` 方法（来自 `@fast-vue3/request`）
-3. 使用 TypeScript 泛型声明返回类型
-
-示例：
-
-```ts
-import { http } from "../http";
-
-export const demoApi = {
-  getList: (params: { page: number; size: number }) =>
-    http.get<{ list: Demo[]; total: number }>({ url: "/demo/list", params }),
-
-  create: (data: CreateDemoDto) => http.post<Demo>({ url: "/demo", data }),
-};
-```
-
-## 新增页面
-
-在 `apps/{app}/src/views/` 下创建 `.vue` 文件即可自动注册路由（`unplugin-vue-router` 文件路由）：
-
-```
-src/views/
-├── index.vue           → /
-├── login/
-│   └── index.vue       → /login
-├── dashboard/
-│   └── index.vue       → /dashboard
-└── settings/
-    └── index.vue       → /settings  ← 新页面
-```
-
-然后在布局的菜单中添加对应的菜单项即可。
-
-## Mock 开发
-
-每个应用的 `mock/` 目录下定义 Mock 数据（通过 `vite-plugin-mock`）：
-
-```ts
-// mock/demo.ts
-export default [
-  {
-    url: '/api/demo/list',
-    method: 'get',
-    response: () => ({
-      code: 0,
-      result: { list: [...], total: 10 },
-      message: 'success',
-    }),
-  },
-];
-```
-
-Mock 在 `.env.development` 中通过 `VITE_USE_MOCK=true` 开启。
-
-## 代码规范
-
-| 工具       | 配置包                         | 触发时机                 |
-| ---------- | ------------------------------ | ------------------------ |
-| ESLint     | `@fast-vue3/eslint-config`     | commit 前（lint-staged） |
-| Prettier   | `@fast-vue3/prettier-config`   | commit 前（lint-staged） |
-| Stylelint  | `@fast-vue3/stylelint-config`  | commit 前（lint-staged） |
-| commitlint | `@fast-vue3/commitlint-config` | commit-msg hook          |
-
-所有规则包统一在 `internal/lint-configs/` 维护。
+文档站是独立仓库 `fast-vue3-site`，使用 `pnpm dev` 与 `pnpm build`。提交前检查实际导航、搜索和死链。main 的 API 行为不能直接套用到 polyrepo，反之亦然。

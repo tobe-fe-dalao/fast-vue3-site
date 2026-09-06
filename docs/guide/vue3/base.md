@@ -1,56 +1,13 @@
-# vite.config.mts 基础配置
+---
+search: false
+---
 
-项目使用 `vite.config.mts`（ESM TypeScript 配置文件），基于 Vite 7 构建。
+# 文档已按分支整理
 
-## 完整配置
+旧版指南已合并到按分支维护的文档。请先确认你使用的是 main 还是 polyrepo，避免混用目录和脚本。
 
-```typescript
-import type { UserConfig, ConfigEnv } from "vite";
-import { loadEnv } from "vite";
-import { createVitePlugins } from "./build/vite/plugins";
-import { fileURLToPath, URL } from "node:url";
-import proxy from "./build/vite/proxy";
-import { wrapperEnv } from "./build/utils";
-
-export default ({ command, mode }: ConfigEnv): UserConfig => {
-  const isBuild = command === "build";
-  const root = process.cwd();
-  const env = loadEnv(mode, root);
-  const viteEnv = wrapperEnv(env);
-
-  return {
-    base: process.env.VITE_BASE_URL,
-    resolve: {
-      alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
-        "#": fileURLToPath(new URL("./types", import.meta.url)),
-      },
-      extensions: [".ts", ".js", ".mjs", ".mts"],
-    },
-
-    // 插件（详见 build/vite/plugins/index.ts）
-    plugins: createVitePlugins(viteEnv, isBuild),
-
-    css: {},
-
-    server: {
-      hmr: { overlay: true },
-      port: 3000,
-      open: false,
-      cors: true,
-      host: "0.0.0.0",
-      proxy,
-    },
-  };
-};
-```
-
-## 关键配置说明
-
-| 配置项         | 说明                                       |
-| -------------- | ------------------------------------------ |
-| `base`         | 通过环境变量 `VITE_BASE_URL` 控制部署路径  |
-| `alias`        | `@` 映射 `src/`，`#` 映射 `types/`         |
-| `plugins`      | 插件按环境条件加载，详见 Vite 插件集成章节 |
-| `server.cors`  | 开发服务器启用 CORS                        |
-| `server.proxy` | 代理配置独立在 `build/vite/proxy.ts`       |
+- [选择分支与快速开始](/zh/guide/getting-started)
+- [Polyrepo 架构与 UI 主题](/zh/polyrepo/ui-theme)
+- [Polyrepo 请求和 Mock](/zh/polyrepo/http-mock)
+- [Main 架构与应用](/zh/monorepo/architecture)
+- [参与文档维护](/zh/guide/workflow)

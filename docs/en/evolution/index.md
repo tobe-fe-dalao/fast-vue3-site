@@ -1,46 +1,11 @@
-# Architecture Evolution Overview
+# Architecture
 
-Fast Vue3 underwent a complete architectural evolution from **Polyrepo (single repo)** to **Monorepo (multi-package repo)**.
+Fast-Vue3 maintains two parallel branches. `polyrepo` is a single Vue application with build-time UI selection. `main` is a pnpm/Turbo workspace with independent admin and portal applications.
 
-## Timeline
+apps/ contains independently runnable admin and portal templates. packages/ contains request, stores, preferences, styles, layout, access, locales and shared contracts. internal/ contains Vite, TypeScript and lint tooling. scripts/ contains vsh and turbo-run.
 
-```
-2022 ~ 2024          2025 Q1              2025 Q2 ~ present
-────────────        ────────────         ────────────────
- Polyrepo phase       Branch split          Monorepo phase
- Single app           polyrepo branch       main branch rebuilt
- Vite + Vue3          Evolves independently Multi-app platform
- Standardization      Single-app focus      5 UI ecosystems
-```
+workspace:* links local packages; catalog: centralizes dependency versions. Turbo dev/build depend on upstream ^build. The Vite config package loads dist/index.mjs, so tool changes require stub/build.
 
-## Two Architectures in Parallel
+Use pnpm create-app to generate an admin or site app and add root dev/build scripts. Main’s request API returns an Axios instance from createHttpClient; createRequest unwraps result. Do not assume it implements polyrepo’s ApiError/204 handling.
 
-| Branch     | Architecture | Description                                            |
-| ---------- | ------------ | ------------------------------------------------------ |
-| `polyrepo` | Polyrepo     | Single-repo, single-app architecture, actively maintained |
-| `main`     | Monorepo     | Multi-app platform, continuously evolving              |
-
-The `polyrepo` and `main` branches **evolve in parallel**, each independently. `polyrepo` represents the best single-repo engineering practices; `main` represents the Monorepo multi-package architecture.
-
-## Why Migrate
-
-Core pain points of the Polyrepo phase:
-
-1. **Version fragmentation** — All dependency versions scattered in a single `package.json`, hard to upgrade uniformly
-2. **No code reuse** — Supporting multiple UI frameworks required duplicating the entire project
-3. **Repeated config** — ESLint, TypeScript, Vite configs had to be rewritten for each project
-4. **No package boundaries** — All code mixed under `src/`, unclear responsibilities
-5. **Poor scalability** — Adding new tech stacks required forking the repository
-
-Core problems Monorepo solves:
-
-- **Unified version management** — pnpm workspace catalog
-- **Shared infrastructure** — `packages/*` written once, reused everywhere
-- **Scalability** — Adding a new UI ecosystem = adding one app in `apps/`
-- **Clear boundaries** — Each package has a single responsibility with a clear API
-
-## This Section
-
-- [Polyrepo Historical Architecture](./polyrepo) — Original structure analysis, technical debt, optimization work
-- [Monorepo New Architecture](./monorepo) — New architecture design, package splitting strategy, key decisions
-- [Architecture Comparison](./comparison) — Pros/cons, use cases, decision rationale
+[Choose a branch](/en/guide/getting-started)

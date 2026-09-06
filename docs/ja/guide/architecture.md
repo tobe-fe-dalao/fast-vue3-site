@@ -1,83 +1,15 @@
-# アーキテクチャ概要
+# アーキテクチャ
 
-Fast Vue3 は **Vue3 Monorepo エンジニアリングプラットフォーム**であり、単なる Admin テンプレートではありません。
+Fast-Vue3 は main と polyrepo の並行ブランチを提供します。polyrepo はビルド時に UI を選択する単一 Vue アプリ、main は独立した管理画面とポータルを持つ pnpm/Turbo Workspace です。
 
-> 複数の主流 Admin UI エコシステムを統合した、再利用可能な Vue3 フロントエンドエンジニアリング基盤。長期進化を前提とするフロントエンドインフラプラットフォーム。
+依存方向は ページ → Store → API → HTTP です。config/ui.ts を基準に、Vite の別名で初期化、テーマ Provider、ログインフォーム、展示コンポーネントを選択します。all モードは 7 種の展示を組み合わせ、ログインには Element Plus を使用します。
 
-## エンジニアリングレイヤー
+アプリ自身の --fv-* 変数とレスポンシブレイアウトを使い、UI ライブラリの reset に依存しません。Ant Design/Naive/iDux は Provider、Element Plus/Arco/TDesign はテーマセレクター、DevUI はテーマサービスで切り替えます。
 
-```
-┌─────────────────────────────────────────────────────┐
-│                     apps/                           │
-│  web-antd  web-ele  web-naive  web-arco  web-tdesign│
-│  （独立アプリ — 専用ルーティング・レイアウト・テーマ） │
-└─────────────────┬───────────────────────────────────┘
-                  │ 依存
-┌─────────────────▼───────────────────────────────────┐
-│                   packages/                         │
-│  @core/shared  utils  stores  locales               │
-│  effects/request  effects/access                    │
-│  （ビジネス基盤 — 全アプリで共有）                    │
-└─────────────────┬───────────────────────────────────┘
-                  │ 工具
-┌─────────────────▼───────────────────────────────────┐
-│                  internal/                          │
-│  vite-config  tsconfig  lint-configs                │
-│  （エンジニアリング基盤 — ビジネスロジックなし）       │
-└─────────────────────────────────────────────────────┘
-```
+pnpm check と各モードのビルドに加え、モバイル幅、明暗テーマ、キーボード入力も確認します。Mock の /api/user/* は開発時のみ有効です。
 
-## コア技術決定
+apps は独立した管理画面とポータル、packages は request/stores/preferences/styles/layout/access/locales と共有型、internal は Vite/TypeScript/lint、scripts は vsh と turbo-run を担当します。
 
-### pnpm Workspace + Catalog
+workspace:* はローカルパッケージ、catalog: は共通バージョンを参照します。Turbo の dev/build は上流の ^build に依存します。Vite 設定は dist/index.mjs から読み込むため、ツール変更後は stub/build が必要です。
 
-`pnpm-workspace.yaml` の `catalog:` フィールドで全依存バージョンを一元管理：
-
-```yaml
-catalog:
-  vue: ^3.5.17
-  vite: ^7.3.3
-  ant-design-vue: ^4.2.6
-  element-plus: ^2.10.2
-```
-
-### Turbo タスクオーケストレーション
-
-`turbo.json` でタスク依存関係を定義：
-
-```json
-{
-  "tasks": {
-    "dev": { "dependsOn": ["^build"], "persistent": true, "cache": false }
-  }
-}
-```
-
-`dev` タスクの `dependsOn: ["^build"]` により、アプリ起動前に `@fast-vue3/vite-config` が必ずビルドされます。
-
-### vite-config 事前コンパイル戦略
-
-`@fast-vue3/vite-config` は Node.js コンテキストで実行される特殊パッケージです。Node.js は TypeScript ファイルを直接実行できないため、`tsdown` で `dist/index.js` にコンパイルする必要があります。
-
-他の `packages/*` は TypeScript ソースを直接エクスポートし（`"default": "./src/index.ts"`）、Vite がビルド時に処理します。
-
-### ポート割り当て
-
-| アプリ      | UI フレームワーク | ポート |
-| ----------- | ----------------- | ------ |
-| web-antd    | Ant Design Vue    | 3001   |
-| web-ele     | Element Plus      | 3002   |
-| web-naive   | Naive UI          | 3003   |
-| web-arco    | Arco Design       | 3004   |
-| web-tdesign | TDesign Vue Next  | 3005   |
-
-## 共有インフラストラクチャ
-
-全アプリが `packages/*` を通じて共有：
-
-- **@fast-vue3/shared** — コア型定義・定数
-- **@fast-vue3/utils** — 認証ユーティリティ・日付フォーマット・ヘルパー
-- **@fast-vue3/stores** — Pinia ストア（useUserStore/useAppStore）+ 永続化
-- **@fast-vue3/locales** — zh-CN / en-US i18n リソース
-- **@fast-vue3/request** — Axios ラッパー（createHttpClient/createRequest）
-- **@fast-vue3/access** — ルートアクセスガード（setupAccessGuard）+ v-access ディレクティブ
+pnpm create-app は admin/site を生成し、ルートに dev/build スクリプトを追加します。main の createHttpClient は Axios インスタンスを返し、createRequest が result を取り出します。polyrepo の ApiError や 204 処理と同一ではありません。

@@ -1,73 +1,20 @@
-# 共享包概览
+# Main 共享包
 
-`packages/` 目录包含所有 UI 应用共享的基础设施包。
+| 包 | 目录 | 职责 |
+| --- | --- | --- |
+| `@fast-vue3/shared` | `packages/@core/shared` | 共享契约、常量与语言配置；位于 packages/@core/shared。 |
+| `@fast-vue3/constants` | `packages/constants` | 跨应用常量。 |
+| `@fast-vue3/access` | `packages/effects/access` | 可选的 setupAccessGuard 与 accessDirective；需在应用中明确注册。 |
+| `@fast-vue3/layout` | `packages/effects/layout` | useLayout 与 ROUTE_TITLES，提供共享布局逻辑。 |
+| [`@fast-vue3/api`](/zh/packages/api) | `packages/effects/api` | 14 个框架应用共用的业务接口、请求参数与响应契约。 |
+| `@fast-vue3/request` | `packages/effects/request` | createHttpClient 创建 Axios 实例，createRequest 解包 `{ code, message, data }`。 |
+| `@fast-vue3/locales` | `packages/locales` | 语言消息数据与 locale 类型，不能直接等同于完整 i18n 运行时。 |
+| `@fast-vue3/preferences` | `packages/preferences` | usePreferences 管理主题、主色、侧栏和布局偏好。 |
+| `@fast-vue3/stores` | `packages/stores` | setupStore、useAppStore、useUserStore，组合 Pinia 与持久化。 |
+| `@fast-vue3/styles` | `packages/styles` | global、reset、themes、site 等样式入口。 |
+| `@fast-vue3/types` | `packages/types` | 跨应用类型。 |
+| `@fast-vue3/utils` | `packages/utils` | 鉴权、日期和通用工具。 |
 
-## 包依赖关系
+包存在不代表所有应用都使用其全部能力。以各应用的 import 和初始化流程为准；尤其是守卫、国际化和主题服务需要显式接入。
 
-```
-@fast-vue3/shared          ← 最底层，无 workspace 依赖
-       │
-       ├──▶ @fast-vue3/utils
-       │           │
-       │           └──▶ @fast-vue3/stores
-       │                         │
-       │                         └──▶ @fast-vue3/access
-       │
-       ├──▶ @fast-vue3/locales
-       │
-       └──▶ @fast-vue3/request
-```
-
-## 包列表
-
-| 包名                 | 路径                       | 职责               |
-| -------------------- | -------------------------- | ------------------ |
-| `@fast-vue3/shared`  | `packages/@core/shared`    | 核心类型定义、常量 |
-| `@fast-vue3/utils`   | `packages/utils`           | 纯函数工具         |
-| `@fast-vue3/stores`  | `packages/stores`          | Pinia store        |
-| `@fast-vue3/locales` | `packages/locales`         | i18n 资源          |
-| `@fast-vue3/request` | `packages/effects/request` | HTTP 请求封装      |
-| `@fast-vue3/access`  | `packages/effects/access`  | 路由权限守卫       |
-
-## 设计原则
-
-### 直接导出 TypeScript 源码
-
-所有 `packages/*` 包的导出配置：
-
-```json
-{
-  "exports": {
-    ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
-    }
-  }
-}
-```
-
-TypeScript 源码直接被各 app 的 Vite 实例编译，无需预先构建，修改后 HMR 立即生效。
-
-### 包边界清晰
-
-- 每个包只暴露必要的公共 API
-- 包内部实现细节不对外泄露
-- 上层包可以依赖下层包，反之不行
-
-### 无副作用导入
-
-所有包的导入都是无副作用的，不会在 `import` 时自动修改全局状态。需要初始化的功能通过明确的 `setup*()` 函数调用。
-
-## 在应用中使用
-
-```ts
-// 在任何 app 的 src/ 代码中直接引用
-import { TOKEN_KEY } from "@fast-vue3/shared";
-import { getToken, formatDate } from "@fast-vue3/utils";
-import { useUserStore, useAppStore } from "@fast-vue3/stores";
-import { zhCN } from "@fast-vue3/locales";
-import { createHttpClient, createRequest } from "@fast-vue3/request";
-import { setupAccessGuard } from "@fast-vue3/access";
-```
-
-详细的 API 文档参见各包的独立页面。
+共享工具 `internal/vite-config`、`internal/tsconfig`、`internal/lint-configs` 属于工程层，不属于这里的运行时包。
