@@ -1,0 +1,14 @@
+import{_ as s,o as e,c as n,ag as p}from"./chunks/framework.Pp2klvcf.js";const u=JSON.parse('{"title":"Polyrepo 模块边界","description":"","frontmatter":{},"headers":[],"relativePath":"zh/polyrepo/architecture.md","filePath":"zh/polyrepo/architecture.md","lastUpdated":1788681727000}'),o={name:"zh/polyrepo/architecture.md"};function t(c,a,r,i,l,d){return e(),n("div",null,[...a[0]||(a[0]=[p(`<h1 id="polyrepo-模块边界" tabindex="-1">Polyrepo 模块边界 <a class="header-anchor" href="#polyrepo-模块边界" aria-label="Permalink to &quot;Polyrepo 模块边界&quot;">​</a></h1><div class="language-text vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>config/ui.ts             # UI 清单、类型与模式校验</span></span>
+<span class="line"><span>build/env.ts             # 构建变量解析</span></span>
+<span class="line"><span>build/vite/              # 插件与代理</span></span>
+<span class="line"><span>mock/                    # 仅开发期接口</span></span>
+<span class="line"><span>src/api/                 # 接口与领域类型</span></span>
+<span class="line"><span>src/store/               # Pinia 实例和业务状态</span></span>
+<span class="line"><span>src/config/              # 浏览器 UI 配置和导航</span></span>
+<span class="line"><span>src/plugins/             # UI 初始化</span></span>
+<span class="line"><span>src/components/ui-theme/ # 框架主题 Provider</span></span>
+<span class="line"><span>src/components/login-forms/ # 登录表单适配</span></span>
+<span class="line"><span>src/components/showcase/ # 展示适配</span></span>
+<span class="line"><span>src/composables/          # 表单和图表生命周期</span></span>
+<span class="line"><span>src/styles/              # 应用设计变量与布局</span></span>
+<span class="line"><span>src/views/               # 文件路由页面</span></span></code></pre></div><h2 id="入口顺序" tabindex="-1">入口顺序 <a class="header-anchor" href="#入口顺序" aria-label="Permalink to &quot;入口顺序&quot;">​</a></h2><p><code>src/main.ts</code> 创建 Vue 实例，安装 Pinia，再初始化 UI 插件与主题，然后安装 Router 并挂载。DevUI 的主题监听依赖 Store，因此不能在 Pinia 安装之前执行。</p><p><code>App.vue</code> 挂载构建期选择的 <code>@ui-theme</code>、统一 Header 和路由出口。页面不再各自创建不同 Header；导航数据不是第二份带组件导入的路由表。</p><h2 id="类型和请求" tabindex="-1">类型和请求 <a class="header-anchor" href="#类型和请求" aria-label="Permalink to &quot;类型和请求&quot;">​</a></h2><p>API 层拥有用户类型，Store 依赖 API，API 不反向依赖 Store。HTTP 工厂可以注入 token 读取函数；Mock 辅助函数不进入浏览器依赖图。</p><h2 id="文件路由" tabindex="-1">文件路由 <a class="header-anchor" href="#文件路由" aria-label="Permalink to &quot;文件路由&quot;">​</a></h2><p><code>build/vite/plugins/pages.ts</code> 扫描 <code>src/views</code>，排除 <code>components</code> 子目录。页面私有组件放在 <code>views/&lt;page&gt;/components</code>，以免意外成为路由。构建阶段关闭文件监听。</p><p><a href="https://github.com/tobe-fe-dalao/fast-vue3/blob/polyrepo/vite.config.mts" target="_blank" rel="noreferrer">源码：<code>vite.config.mts</code></a></p>`,10)])])}const m=s(o,[["render",t]]);export{u as __pageData,m as default};
