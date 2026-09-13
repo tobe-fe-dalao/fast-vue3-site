@@ -37,3 +37,5 @@ const posts = await api.portal.blogList({ category: '工程实践' });
 5. 在服务端集成测试断言响应信封与分页结构。
 
 [Request 层](/zh/packages/request) · [Mock 与请求](/zh/monorepo/mock-api)
+
+`createApi(http)` 还从 `src/modules/enterprise.ts` 导出 `tenant`、`organization`、`department`、`project`、`task`、`approval`、`notification`、`audit`、`file` 客户端。创建项目及提交审批传入 `Idempotency-Key`；更新项目或任务需要 `version`。`file.download()` 通过请求层的二进制方法返回 `Blob`。路径与权限见[企业业务域](/zh/server/api/enterprise)。

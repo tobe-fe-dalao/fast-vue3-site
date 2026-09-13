@@ -17,3 +17,9 @@ VITE_FAST_VUE3_SERVER_URL=http://localhost:8080 pnpm dev:server
 ```
 
 単一アプリなら `VITE_DEV_BACKEND=server pnpm dev:site-antd` のように起動します。公開コンテンツとコメント閲覧は Token 不要です。管理 API、コメント投稿、注文作成には Bearer Token が必要です。
+
+## 企業向け画面
+
+`VITE_DEV_BACKEND=server pnpm dev:web-antd` で管理画面を起動し、Java サービスの開発アカウント `admin / admin123` でログインします。`web-antd` にはプロジェクト・タスク、承認、組織、テナント、監査、ファイル、通知の画面があります。共有クライアントは `packages/effects/api/src/modules/enterprise.ts`、ルートと権限は[企業向けドメイン](/ja/server/api/enterprise)を参照してください。
+
+テナント分離、メンバー制約、タスク遷移、承認手順、ファイル永続化は Java サービスで検証します。ブラウザに `/api/v1` が見えるだけでは上流サービスを識別できないため、Vite Proxy 設定と Java のヘルスエンドポイントも確認します。Nitro のメモリデータは API 形状の確認用です。

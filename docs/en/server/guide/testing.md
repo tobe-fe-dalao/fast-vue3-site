@@ -14,3 +14,5 @@ The suite has three layers:
 Every endpoint should have a success case and an error or authentication case. `PortalControllerWebTest` covers anonymous content reads. `SiteInteractionControllerWebTest` proves that comments are publicly readable while comment creation and checkout require authentication.
 
 For an end-to-end smoke test, start the Compose `app` profile, call a public endpoint without a token, assert a protected write returns 401, sign in, and retry with `Authorization: Bearer <accessToken>`.
+
+For enterprise changes, run `clean verify` after the final edit. `TenantIsolationIntegrationTest` checks cross-tenant reads with PostgreSQL; `ProjectServiceTest`, `TaskStateTransitionTest`, `TaskOptimisticLockTest`, `ApprovalWorkflowTest`, `IdempotencyTest`, and `SecurityAccessTest` cover separate business and security rules. A documentation build checks links and rendering, not Java or frontend package behavior.

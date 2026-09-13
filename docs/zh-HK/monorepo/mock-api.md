@@ -4,3 +4,4 @@
 
 `@fast-vue3/request` 附加 Token 並展開 `{ code, message, data }`；`@fast-vue3/api` 提供業務方法。公開讀取不需 Token，後台、評論送出及支付訂單需要登入。
 
+企業路由由 `apps/backend-mock/api/v1/[...].ts` 呼叫記憶體 `createStaticEnterpriseApi`。Nitro 要求 Mock Access Token，並將大部分企業路徑限於 `admin` 模擬帳戶；它不實作 Java 的完整權限、租戶隔離、交易或持久化。瀏覽器靜態預覽使用相同資料。業務規則請以[真實後端](/zh-HK/monorepo/backend-integration)驗證。

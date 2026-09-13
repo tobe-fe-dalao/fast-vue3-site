@@ -15,9 +15,9 @@ hero:
 
 features:
   - title: Modular monolith
-    details: Authentication, management, content, portal, comments, and payments are organized by business capability.
-  - title: Mock/server parity
-    details: The Spring service and Nitro mock share envelopes, pagination fields, resource types, and authentication boundaries.
+    details: Authentication, content, tenants, organizations, projects, tasks, approvals, and notifications are organized by business capability.
+  - title: Shared API shapes
+    details: Spring and Nitro share routes and response types; the Java service owns durable business rules and tenant isolation.
   - title: Verifiable
-    details: Unit, MockMvc, integration, and real HTTP checks cover the critical paths.
+    details: Unit, MockMvc, and Testcontainers tests cover separate layers; run real HTTP checks for the deployed service.
 ---

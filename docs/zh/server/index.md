@@ -15,9 +15,9 @@ hero:
 
 features:
   - title: 模块化单体
-    details: 认证、用户、角色、菜单、内容和门户按业务纵向组织，保持边界清晰。
-  - title: 双数据源一致
-    details: 与 fast-vue3 的 Nitro Mock 共享响应信封、分页字段和资源模型。
+    details: 认证、内容、租户组织、项目任务、审批和通知按业务纵向组织。
+  - title: 共享接口形状
+    details: Spring 与 Nitro 共享路由和响应类型；持久化业务规则及租户隔离由 Java 服务实现。
   - title: 可验证
     details: JUnit 单测、MockMvc 切片测试和 Testcontainers 集成测试覆盖核心路径。
 ---

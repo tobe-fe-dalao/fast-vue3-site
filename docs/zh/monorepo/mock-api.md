@@ -20,4 +20,6 @@ Mock 是开发与集成测试服务，不是生产身份系统。真实后端的
 
 Mock 与真实服务使用同一鉴权边界：`GET /api/v1/public/**` 可匿名访问，`POST /api/v1/blog/{id}/comments` 与 `POST /api/v1/payments/checkout` 必须登录。集成测试会实际启动 Nitro 监听端口，验证匿名读取、匿名写入 401、登录、评论与创建订单。
 
+企业域路由在 `apps/backend-mock/api/v1/[...].ts` 中调用内存版 `createStaticEnterpriseApi`。Nitro 要求 Mock Access Token，多数企业路径仅允许其 `admin` 模拟账号，但未实现 Java 服务完整的细粒度权限、租户隔离、事务和持久化；浏览器静态预览也使用同一内存实现。业务规则请连接[真实后端](/zh/monorepo/backend-integration)验证。
+
 [源码：`apps/backend-mock/api/v1`](https://github.com/tobe-fe-dalao/fast-vue3/tree/main/apps/backend-mock/api/v1) · [源码：`packages/effects/request/src/client.ts`](https://github.com/tobe-fe-dalao/fast-vue3/blob/main/packages/effects/request/src/client.ts)

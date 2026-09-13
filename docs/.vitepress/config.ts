@@ -22,7 +22,7 @@ const zh = [
   group('Main · Monorepo', [['整体架构','/zh/monorepo/architecture'], ['开发与脚手架','/zh/monorepo/development'], ['Mock 与请求','/zh/monorepo/mock-api'], ['真实后端联调','/zh/monorepo/backend-integration'], ['测试与质量门禁','/zh/monorepo/testing'], ['应用清单','/zh/apps/'], ['共享包','/zh/packages/']]),
   group('应用适配', [['Ant Design Vue','/zh/apps/antd'], ['Arco','/zh/apps/arco-design'], ['Element Plus','/zh/apps/element-plus'], ['Naive UI','/zh/apps/naive-ui'], ['TDesign','/zh/apps/tdesign'], ['iDux','/zh/apps/idux'], ['PrimeVue','/zh/apps/primevue']]),
   group('共享能力', [['API','/zh/packages/api'], ['Request','/zh/packages/request'], ['Stores','/zh/packages/stores'], ['Preferences','/zh/packages/preferences'], ['Layout','/zh/packages/layout'], ['Access','/zh/packages/access'], ['Styles','/zh/packages/styles'], ['Locales','/zh/packages/locales']]),
-  group('后端服务', [['概览','/zh/server/'], ['快速开始','/zh/server/guide/getting-started'], ['配置与部署','/zh/server/guide/configuration'], ['测试策略','/zh/server/guide/testing'], ['接口契约','/zh/server/api/contracts'], ['认证与 RBAC','/zh/server/api/auth-rbac'], ['内容与门户','/zh/server/api/content-portal'], ['管理端数据','/zh/server/api/management']]),
+  group('后端服务', [['概览','/zh/server/'], ['快速开始','/zh/server/guide/getting-started'], ['配置与部署','/zh/server/guide/configuration'], ['测试策略','/zh/server/guide/testing'], ['接口契约','/zh/server/api/contracts'], ['认证与 RBAC','/zh/server/api/auth-rbac'], ['企业业务域','/zh/server/api/enterprise'], ['内容与门户','/zh/server/api/content-portal'], ['管理端数据','/zh/server/api/management']]),
 ];
 function translated(lang: TranslatedLocale, labels: LocaleLabels) {
   const words = lang === 'en'
@@ -36,6 +36,7 @@ function translated(lang: TranslatedLocale, labels: LocaleLabels) {
         content: 'Content and portal',
         contract: 'API contract',
         development: 'Development and scaffolding',
+        enterprise: 'Enterprise domains',
         main: 'Main · Monorepo',
         management: 'Admin data',
         mock: 'Mock API and requests',
@@ -58,6 +59,7 @@ function translated(lang: TranslatedLocale, labels: LocaleLabels) {
         content: 'コンテンツとポータル',
         contract: 'API 契約',
         development: '開発とスキャフォールド',
+        enterprise: '企業向けドメイン',
         main: 'Main · モノレポ',
         management: '管理画面データ',
         mock: 'Mock API とリクエスト',
@@ -79,6 +81,7 @@ function translated(lang: TranslatedLocale, labels: LocaleLabels) {
           content: '內容與入口網站',
           contract: 'API 契約',
           development: '開發與腳手架',
+          enterprise: '企業業務領域',
           main: 'Main · Monorepo',
           management: '管理端資料',
           mock: 'Mock API 與請求',
@@ -106,7 +109,7 @@ function translated(lang: TranslatedLocale, labels: LocaleLabels) {
       group(words.main, [[words.overview,`/${lang}/monorepo/`],[words.architecture,`/${lang}/monorepo/architecture`],[words.development,`/${lang}/monorepo/development`],[words.mock,`/${lang}/monorepo/mock-api`],[words.backend,`/${lang}/monorepo/backend-integration`],[words.testing,`/${lang}/monorepo/testing`]]),
       group(words.apps, [['Ant Design Vue',`/${lang}/apps/antd`],['Arco Design',`/${lang}/apps/arco-design`],['Element Plus',`/${lang}/apps/element-plus`],['iDux',`/${lang}/apps/idux`],['Naive UI',`/${lang}/apps/naive-ui`],['PrimeVue',`/${lang}/apps/primevue`],['TDesign',`/${lang}/apps/tdesign`]]),
       group(words.packages, [['API',`/${lang}/packages/api`],['Request',`/${lang}/packages/request`],['Stores',`/${lang}/packages/stores`],['Preferences',`/${lang}/packages/preferences`],['Layout',`/${lang}/packages/layout`],['Access',`/${lang}/packages/access`],['Styles',`/${lang}/packages/styles`],['Locales',`/${lang}/packages/locales`],['Types',`/${lang}/packages/types`],['Utils',`/${lang}/packages/utils`]]),
-      group(words.server, [[words.overview,`/${lang}/server/`],[labels[2],`/${lang}/server/guide/getting-started`],[words.configuration,`/${lang}/server/guide/configuration`],[words.testing,`/${lang}/server/guide/testing`],[words.contract,`/${lang}/server/api/contracts`],[words.auth,`/${lang}/server/api/auth-rbac`],[words.content,`/${lang}/server/api/content-portal`],[words.management,`/${lang}/server/api/management`]])
+      group(words.server, [[words.overview,`/${lang}/server/`],[labels[2],`/${lang}/server/guide/getting-started`],[words.configuration,`/${lang}/server/guide/configuration`],[words.testing,`/${lang}/server/guide/testing`],[words.contract,`/${lang}/server/api/contracts`],[words.auth,`/${lang}/server/api/auth-rbac`],[words.enterprise,`/${lang}/server/api/enterprise`],[words.content,`/${lang}/server/api/content-portal`],[words.management,`/${lang}/server/api/management`]])
     ]}
   }};
 }

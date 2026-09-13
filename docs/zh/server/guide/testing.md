@@ -14,3 +14,5 @@
 新增接口至少应覆盖一个成功路径和一个错误/鉴权路径。分页接口还要断言 `items / page / pageSize / total`，避免前端在 Mock 与真实服务间切换时出现结构漂移。
 
 门户公开接口测试位于 `module/portal/PortalControllerWebTest`，管理端聚合接口测试位于 `module/demo/DemoDataControllerWebTest`。
+
+企业域变更应在最终修改后执行完整 `./mvnw clean verify`。`TenantIsolationIntegrationTest` 用 PostgreSQL 检查跨租户读取；`ProjectServiceTest`、`TaskStateTransitionTest`、`TaskOptimisticLockTest`、`ApprovalWorkflowTest`、`IdempotencyTest`、`SecurityAccessTest` 分别覆盖业务和安全规则。文档站构建只检查渲染与链接，不能代替 Java 或前端测试。

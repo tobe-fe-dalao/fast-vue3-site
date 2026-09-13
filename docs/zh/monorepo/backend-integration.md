@@ -48,3 +48,9 @@ VITE_DEV_BACKEND=server pnpm dev:site-antd
 3. 登录后确认请求头包含 `Authorization: Bearer ...`；
 4. 401 检查 Token，403 检查角色权限；
 5. 对比分页字段是否为 `items / page / pageSize / total`。
+
+## 企业业务页面
+
+以 Server 模式启动 `web-antd`，可使用项目任务、审批、组织、租户、审计、文件和通知页面。请用 Java 服务的开发账号 `admin / admin123` 登录，不要使用 Nitro Mock 的 `admin / 123456`。共享客户端在 `packages/effects/api/src/modules/enterprise.ts`；完整路径与权限见[企业业务域](/zh/server/api/enterprise)。
+
+租户隔离、项目成员、任务状态、审批步骤、文件访问和持久化行为应连接 Java 服务验证；Nitro 内存数据仅用于接口形状联调。浏览器看到 `/api/v1` 还不能证明请求到达哪个服务，应同时核对 Vite 代理配置和 Java 健康端点。企业域列表如项目、审批直接返回数组，不需要套用第 5 步的分页字段。

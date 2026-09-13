@@ -15,9 +15,9 @@ hero:
 
 features:
   - title: モジュラーモノリス
-    details: 認証、管理、コンテンツ、ポータル、コメント、決済を業務単位で整理しています。
-  - title: Mock と実サーバーの互換性
-    details: Nitro Mock と Spring サービスはレスポンス、ページング、型、認証境界を共有します。
+    details: 認証、コンテンツ、テナント・組織、プロジェクト・タスク、承認、通知を業務単位で整理しています。
+  - title: 共通の API 形状
+    details: Nitro と Spring はルートとレスポンス型を共有します。永続化とテナント分離は Java サービスが担います。
   - title: 検証可能
     details: Unit、MockMvc、統合テスト、実 HTTP チェックで主要経路を確認できます。
 ---

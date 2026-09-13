@@ -9,3 +9,5 @@ const order = await api.portal.checkout({ planId: 2, channel: 'alipay' });
 ```
 
 公開読み取りは `/public/**` を使います。認証が必要な操作はそのプレフィックスを使わず、リクエスト interceptor が Access Token を付与します。API 追加時は TypeScript 型、Nitro、Spring、テストを同時に更新してください。
+
+`createApi(http)` は `src/modules/enterprise.ts` から `tenant`、`organization`、`department`、`project`、`task`、`approval`、`notification`、`audit`、`file` も公開します。プロジェクト作成と承認提出には `Idempotency-Key`、プロジェクトとタスクの更新には `version` が必要です。`file.download()` はバイナリヘルパーから `Blob` を返します。ルートと権限は[企業向けドメイン](/ja/server/api/enterprise)を参照してください。

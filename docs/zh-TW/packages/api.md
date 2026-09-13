@@ -4,3 +4,4 @@
 
 新增 API 時同步型別、模組、Nitro、Spring 與測試。
 
+`createApi(http)` 亦從 `src/modules/enterprise.ts` 匯出 `tenant`、`organization`、`department`、`project`、`task`、`approval`、`notification`、`audit`、`file`。建立專案及提交審批需要 `Idempotency-Key`，更新專案或任務需要 `version`；`file.download()` 回傳 `Blob`。詳見[企業業務領域](/zh-TW/server/api/enterprise)。
