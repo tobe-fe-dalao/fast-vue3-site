@@ -1,6 +1,6 @@
 # Main 的 Mock 与请求
 
-Main 使用 `apps/backend-mock` 的 Nitro 服务。默认执行 `pnpm dev:mock`，共享 Vite 插件会启动 Mock 并把应用的 `/api/v1` 请求代理到 `http://localhost:5320`；也可以用 `pnpm dev:backend-mock` 单独启动。
+Main 使用 `apps/backend-mock` 的 Nitro 服务。默认执行 `pnpm dev:mock`，共享 Vite 插件会为所选前端启动 Mock 并把 `/api/v1` 请求代理到 `http://localhost:5320`。`pnpm dev:mock:api` 只启动 5320 端口的独立 Mock API；`pnpm dev:backend-mock` 是它的别名。Mock 在本地生成响应，不会请求 `fast-vue3-server`。
 
 服务包含用户登录/资料、角色、菜单、部门、字典、日志、监控和统计等模拟接口。内置账号为 `admin / 123456` 与 `user / 123456`。
 
@@ -21,5 +21,7 @@ Mock 是开发与集成测试服务，不是生产身份系统。真实后端的
 Mock 与真实服务使用同一鉴权边界：`GET /api/v1/public/**` 可匿名访问，`POST /api/v1/blog/{id}/comments` 与 `POST /api/v1/payments/checkout` 必须登录。集成测试会实际启动 Nitro 监听端口，验证匿名读取、匿名写入 401、登录、评论与创建订单。
 
 企业域路由在 `apps/backend-mock/api/v1/[...].ts` 中调用内存版 `createStaticEnterpriseApi`。Nitro 要求 Mock Access Token，多数企业路径仅允许其 `admin` 模拟账号，但未实现 Java 服务完整的细粒度权限、租户隔离、事务和持久化；浏览器静态预览也使用同一内存实现。业务规则请连接[真实后端](/zh/monorepo/backend-integration)验证。
+
+七个 `site-*` 应用的公开内容页面已使用共享门户客户端；`web-app` 接入首页、特性、关于、博客列表和联系接口。其他六个 `web-*` 后台的仪表盘、分析、用户和角色页面也使用 API 数据。它们通过 Vite 模式选择 Mock 或 Java，不会通过 Mock 转发到 Java。
 
 [源码：`apps/backend-mock/api/v1`](https://github.com/tobe-fe-dalao/fast-vue3/tree/main/apps/backend-mock/api/v1) · [源码：`packages/effects/request/src/client.ts`](https://github.com/tobe-fe-dalao/fast-vue3/blob/main/packages/effects/request/src/client.ts)

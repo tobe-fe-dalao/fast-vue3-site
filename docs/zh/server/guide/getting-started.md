@@ -2,8 +2,8 @@
 
 ## 环境
 
-- JDK 21
 - Docker 与 Docker Compose
+- 仅在本机运行 Java 时需要 JDK 21
 
 ## 启动
 
@@ -39,10 +39,14 @@ docker compose up -d
 在 `fast-vue3` 仓库运行：
 
 ```bash
-VITE_FAST_VUE3_SERVER_URL=http://localhost:8080 pnpm dev:server
+pnpm dev:server
+# 或直接启动一个门户应用
+VITE_DEV_BACKEND=server pnpm dev:site-antd
 ```
 
 前端始终请求 `/api/v1`，共享 Vite 配置负责代理；页面不需要知道当前使用 Nitro Mock 还是真实服务。
+
+`pnpm dev:server` 只启动所选前端；在前端仓库运行 `pnpm dev:server:api` 可通过同级 `fast-vue3-server` 的 Docker Compose 文件单独启动 Java 服务。
 
 ## 文档
 

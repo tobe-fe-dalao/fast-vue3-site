@@ -2,8 +2,8 @@
 
 ## Requirements
 
-- JDK 21
 - Docker and Docker Compose
+- JDK 21 only when running Java outside Docker
 
 ## Start the API
 
@@ -35,11 +35,12 @@ The API listens on `http://localhost:8080`. Check `GET /actuator/health`, open `
 From the `fast-vue3` repository:
 
 ```bash
-VITE_FAST_VUE3_SERVER_URL=http://localhost:8080 pnpm dev:server
-pnpm dev:site-antd
+pnpm dev:server
+# or start one portal directly
+VITE_DEV_BACKEND=server pnpm dev:site-antd
 ```
 
-The browser always calls `/api/v1`; the shared Vite proxy selects the configured backend.
+The browser always calls `/api/v1`; the shared Vite proxy selects the configured backend. `pnpm dev:server` starts only the frontend. From `fast-vue3`, `pnpm dev:server:api` starts the Java stack separately through the sibling repository's Docker Compose file.
 
 ## Documentation
 

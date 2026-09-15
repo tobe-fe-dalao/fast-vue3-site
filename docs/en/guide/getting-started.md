@@ -9,7 +9,7 @@ Use Node 22.18+ for a common development environment. Each branch declares its o
 | polyrepo | `pnpm dev` | `VITE_UI_FRAMEWORK` | test / test |
 | main | `pnpm dev:web-antd` | select an apps/* package | admin / 123456 |
 
-Polyrepo runs on 127.0.0.1:5173 by default and includes DevUI. Main includes PrimeVue, seven admin apps, seven portal apps, web-app and backend-mock. Polyrepo is not an archived branch. Production builds require a real backend.
+Polyrepo runs on 127.0.0.1:5173 by default and includes DevUI. Main includes PrimeVue, seven admin apps, seven portal apps, web-app and backend-mock. In main, `pnpm dev` selects a frontend with Nitro Mock; `pnpm dev:server` selects one that connects to the independently started Java API. Polyrepo is not an archived branch. Production builds require a real backend.
 
 ```sh
 pnpm install --frozen-lockfile

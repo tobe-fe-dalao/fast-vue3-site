@@ -4,7 +4,7 @@ Fast-Vue3 maintains two parallel branches. `polyrepo` is a single Vue applicatio
 
 | Application | Development command | Declared port |
 | --- | --- | --- |
-| `backend-mock` | `pnpm dev:backend-mock` | — |
+| `backend-mock` | `pnpm dev:mock:api` (`dev:backend-mock` alias) | 5320 |
 | `site-antd` | `pnpm dev:site-antd` | — |
 | `site-arco` | `pnpm dev:site-arco` | — |
 | `site-ele` | `pnpm dev:site-ele` | — |
@@ -20,5 +20,7 @@ Fast-Vue3 maintains two parallel branches. `polyrepo` is a single Vue applicatio
 | `web-naive` | `pnpm dev:web-naive` | 3004 |
 | `web-primevue` | `pnpm dev:web-primevue` | 3006 |
 | `web-tdesign` | `pnpm dev:web-tdesign` | 3005 |
+
+The seven `site-*` portals read public content through `@fast-vue3/api` and submit contact, comments, and checkout through the same client. `web-app` uses the public home, features, about, blog list, and contact methods. All seven `web-*` admins use API data for dashboard, analytics, user, and role views; `web-antd` additionally provides enterprise workflows. Start any single frontend in server mode with `VITE_DEV_BACKEND=server pnpm dev:<app-name>` after starting Java independently.
 
 [Workflow](/en/monorepo/development)

@@ -27,8 +27,11 @@ API は `http://localhost:8080` で起動します。ヘルスチェックは `G
 フロントエンドとの接続:
 
 ```bash
-VITE_FAST_VUE3_SERVER_URL=http://localhost:8080 pnpm dev:server
-pnpm dev:site-antd
+pnpm dev:server
+# またはポータルを 1 つだけ起動
+VITE_DEV_BACKEND=server pnpm dev:site-antd
 ```
+
+`pnpm dev:server` はフロントエンドだけを起動します。`fast-vue3` から `pnpm dev:server:api` を実行すると、隣接する Java リポジトリの Docker Compose 設定で API を別途起動できます。
 
 サーバードキュメントは [fast-vue3-site](https://tobe-fe-dalao.github.io/fast-vue3-site/ja/server/) で一元管理します。`fast-vue3-server` リポジトリ自体には Node.js や VitePress のツールチェーンを置きません。

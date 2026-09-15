@@ -32,7 +32,7 @@ pnpm install --frozen-lockfile
 pnpm dev:web-antd
 ```
 
-main 的后台 Mock 账号为 `admin / 123456` 或 `user / 123456`，与 polyrepo 不同。门户页面主要是模板演示，请逐应用确认接口行为。
+main 的后台 Mock 账号为 `admin / 123456` 或 `user / 123456`，与 polyrepo 不同。`pnpm dev` 默认选择前端并启动 Nitro Mock；`pnpm dev:server` 只启动前端并连接单独运行的 Java 服务。七个 `site-*` 的公开内容页面已接入门户 API，具体覆盖范围见[应用清单](/zh/apps/)。
 
 ## 下一步
 

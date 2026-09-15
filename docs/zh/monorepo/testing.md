@@ -9,7 +9,7 @@ pnpm test
 pnpm build
 ```
 
-`typecheck` 会覆盖 7 个 web 和 7 个 site 应用；`test` 会运行共享包单测，并构建、启动 Nitro 服务执行真实 HTTP 集成测试。
+`typecheck` 会覆盖 7 个 web、7 个 site、`web-app`，以及 Vite 配置与 `vsh` 工具的 TypeScript 源码；`test` 会运行共享包单测，并构建、启动 Nitro 服务执行真实 HTTP 集成测试。
 
 ## 分层策略
 

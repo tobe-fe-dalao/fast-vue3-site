@@ -1,6 +1,6 @@
 # Mock API and requests
 
-`pnpm dev:mock` starts the Nitro service in `apps/backend-mock` and the selected frontends. `pnpm dev:backend-mock` starts only the API. Development accounts are `admin / 123456` and `user / 123456`.
+`pnpm dev:mock` selects a frontend and starts its Nitro Mock service. `pnpm dev:mock:api` starts only the standalone Mock API on port 5320; `pnpm dev:backend-mock` is an alias. Development accounts are `admin / 123456` and `user / 123456`. The Mock implements responses locally and does not call `fast-vue3-server`.
 
 Pages call the domain client from `@fast-vue3/api`. `@fast-vue3/request` attaches the stored token, unwraps `{ code, message, data }`, and throws backend messages for failed business responses.
 

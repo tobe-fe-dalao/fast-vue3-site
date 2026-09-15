@@ -4,7 +4,7 @@ Fast-Vue3 は main と polyrepo の並行ブランチを提供します。polyre
 
 | 应用 | 开发命令 | 开发端口声明 |
 | --- | --- | --- |
-| `backend-mock` | `pnpm dev:backend-mock` | — |
+| `backend-mock` | `pnpm dev:mock:api` (`dev:backend-mock` の別名) | 5320 |
 | `site-antd` | `pnpm dev:site-antd` | — |
 | `site-arco` | `pnpm dev:site-arco` | — |
 | `site-ele` | `pnpm dev:site-ele` | — |
@@ -20,5 +20,7 @@ Fast-Vue3 は main と polyrepo の並行ブランチを提供します。polyre
 | `web-naive` | `pnpm dev:web-naive` | 3004 |
 | `web-primevue` | `pnpm dev:web-primevue` | 3006 |
 | `web-tdesign` | `pnpm dev:web-tdesign` | 3005 |
+
+7 つの `site-*` は公開コンテンツを共有 API から取得し、7 つの `web-*` はダッシュボード・分析・ユーザー・ロール画面に API データを使用します。`web-app` はホーム・機能・概要・ブログ一覧・お問い合わせに接続します。`web-antd` には企業向け画面もあります。Java API は別途起動し、単一フロントエンドには `VITE_DEV_BACKEND=server pnpm dev:<app-name>` を使用します。
 
 [開発フロー](/ja/monorepo/development)
